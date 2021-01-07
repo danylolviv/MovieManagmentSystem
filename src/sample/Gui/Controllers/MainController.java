@@ -46,6 +46,15 @@ public class MainController implements Initializable {
         stage.show();
     }
 
+
+    public void openCategories(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/sample/Gui/Views/CategoriesView.fxml"));
+        Stage pastaStage = new Stage();
+        pastaStage.setTitle("Categories");
+        pastaStage.setScene(new Scene(root));
+        pastaStage.show();
+    }
+
     public void addPath(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/sample/Gui/Views/AddPathView.fxml"));
         Stage pastaStage = new Stage();
