@@ -9,7 +9,6 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="anchorid" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Gui.Controllers.AddPathViewController">
@@ -47,7 +46,6 @@
             <Font name="Impact" size="19.0" />
          </font>
       </Label>
-      <SVGPath content="&lt;svg width=&quot;24&quot; height=&quot;24&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; fill-rule=&quot;evenodd&quot; clip-rule=&quot;evenodd&quot;&gt;&lt;path d=&quot;M15.668 8.626l8.332 1.159-6.065 5.874 1.48 8.341-7.416-3.997-7.416 3.997 1.481-8.341-6.064-5.874 8.331-1.159 3.668-7.626 3.669 7.626zm-6.67.925l-6.818.948 4.963 4.807-1.212 6.825 6.068-3.271 6.069 3.271-1.212-6.826 4.964-4.806-6.819-.948-3.002-6.241-3.001 6.241z&quot;/&gt;&lt;/svg&gt;&lt;svg width=&quot;24&quot; height=&quot;24&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; fill-rule=&quot;evenodd&quot; clip-rule=&quot;evenodd&quot;&gt;&lt;path d=&quot;M15.668 8.626l8.332 1.159-6.065 5.874 1.48 8.341-7.416-3.997-7.416 3.997 1.481-8.341-6.064-5.874 8.331-1.159 3.668-7.626 3.669 7.626zm-6.67.925l-6.818.948 4.963 4.807-1.212 6.825 6.068-3.271 6.069 3.271-1.212-6.826 4.964-4.806-6.819-.948-3.002-6.241-3.001 6.241z&quot;/&gt;&lt;/svg&gt;" layoutX="454.0" layoutY="66.0" smooth="false" />
       <Slider layoutX="463.0" layoutY="87.0" prefHeight="16.0" prefWidth="66.0" />
    </children>
 </AnchorPane>
