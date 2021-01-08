@@ -12,7 +12,8 @@ import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import sample.Be.Category;
 import sample.Dal.DAOCategory;
-
+import sample.Dal.DAOMovie;
+import sample.Be.Movie;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -22,13 +23,16 @@ import java.util.ResourceBundle;
 public class MainController implements Initializable {
 
     private ObservableList<Category> categories;
+    private ObservableList<Movie> movies;
 
     @FXML
-    private ListView<Category > listCategory;
-
+    private ListView<Category> listCategory;
+    @FXML
+    private ListView<Movie> listMovie;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         getAllCategories();
+        getAllMovies();
     }
 
     public void getAllCategories(){
@@ -36,6 +40,12 @@ public class MainController implements Initializable {
         categories = FXCollections.observableArrayList();
         categories.addAll(db.getAllCategories());
         listCategory.setItems(categories);
+    }
+    public void getAllMovies(){
+        DAOMovie db = new DAOMovie();
+        movies = FXCollections.observableArrayList();
+        movies.addAll(db.getAllMovies());
+        listMovie.setItems(movies);
     }
     @FXML
     private void openWindow(ActionEvent actionEvent) throws IOException {
