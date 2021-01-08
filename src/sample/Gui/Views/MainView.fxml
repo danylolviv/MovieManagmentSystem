@@ -35,7 +35,7 @@
                   <Font name="System Bold" size="17.0" />
                </font>
             </Label>
-            <ListView fx:id="listMovies" layoutX="345.0" layoutY="87.0" prefHeight="607.0" prefWidth="333.0" />
+            <ListView fx:id="listMovie" layoutX="345.0" layoutY="87.0" prefHeight="607.0" prefWidth="333.0" />
             <Pane fx:id="infoBox" layoutX="812.0" layoutY="87.0" prefHeight="285.0" prefWidth="447.0" />
             <Label layoutX="1019.0" layoutY="54.0" prefHeight="26.0" prefWidth="34.0" text="Info" textFill="WHITE">
                <font>
