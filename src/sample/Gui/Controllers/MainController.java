@@ -9,11 +9,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import sample.Be.Category;
+import sample.Bll.MovieManager;
 import sample.Dal.DAOCategory;
 import sample.Dal.DAOMovie;
 import sample.Be.Movie;
+import sample.Gui.Models.MovieModel;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -25,14 +29,22 @@ public class MainController implements Initializable {
     private ObservableList<Category> categories;
     private ObservableList<Movie> movies;
 
+    MovieModel movModel;
+
     @FXML
     private ListView<Category> listCategory;
     @FXML
     private ListView<Movie> listMovie;
+    @FXML
+    private TextField typeField;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         getAllCategories();
         getAllMovies();
+
+        typeField.textProperty().addListener((observableValue, s, t1) -> {
+            listMovie.setItems(movModel.searchedMovies(t1));
+        });
     }
 
     public void getAllCategories(){
@@ -41,12 +53,14 @@ public class MainController implements Initializable {
         categories.addAll(db.getAllCategories());
         listCategory.setItems(categories);
     }
+
     public void getAllMovies(){
-        DAOMovie db = new DAOMovie();
+        movModel = new MovieModel();
         movies = FXCollections.observableArrayList();
-        movies.addAll(db.getAllMovies());
+        movies.addAll(movModel.getMovies());
         listMovie.setItems(movies);
     }
+
     @FXML
     private void openWindow(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/sample/Gui/Views/Sidechick.fxml"));
@@ -72,4 +86,6 @@ public class MainController implements Initializable {
         pastaStage.setScene(new Scene(root));
         pastaStage.show();
     }
+
+
 }
