@@ -1,24 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="anchorid" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Gui.Controllers.AddPathViewController">
    <children>
-      <Button layoutX="407.0" layoutY="181.0" mnemonicParsing="false" onAction="#findFile" text="File" />
-      <TextField fx:id="pathToMovie" layoutX="130.0" layoutY="181.0" prefWidth="257.0" promptText="Path to your movie" />
-      <Label layoutX="130.0" layoutY="98.0" prefHeight="23.0" prefWidth="257.0" text="Choose location of your movie">
+      <Button layoutX="434.0" layoutY="285.0" mnemonicParsing="false" onAction="#findFile" text="File" />
+      <TextField fx:id="pathToMovie" layoutX="151.0" layoutY="285.0" prefWidth="257.0" promptText="Path to your movie" />
+      <Label layoutX="31.0" layoutY="24.0" prefHeight="23.0" prefWidth="92.0" text="New Movie">
          <font>
             <Font name="Impact" size="19.0" />
          </font>
       </Label>
-      <Button layoutX="231.0" layoutY="320.0" mnemonicParsing="false" onAction="#openIt" text="Open file Bich">
+      <Button layoutX="193.0" layoutY="338.0" mnemonicParsing="false" onAction="#openIt" text="Open file Bich">
          <font>
             <Font name="System Font" size="17.0" />
          </font>
       </Button>
+      <Label layoutX="31.0" layoutY="65.0" prefHeight="17.0" prefWidth="68.0" text="Movie Title:" />
+      <Label layoutX="31.0" layoutY="95.0" text="Year:" />
+      <Label layoutX="28.0" layoutY="125.0" text="Release Date:" />
+      <Label layoutX="30.0" layoutY="156.0" text="Category:" />
+      <Label layoutX="32.0" layoutY="219.0" text="Description:" />
+      <TextField fx:id="movieTitleField" layoutX="151.0" layoutY="60.0" />
+      <TextField fx:id="yearField" layoutX="151.0" layoutY="90.0" />
+      <DatePicker fx:id="releaseDateField" layoutX="151.0" layoutY="120.0" />
+      <MenuButton layoutX="151.0" layoutY="151.0" mnemonicParsing="false" text="MenuButton">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Action 1" />
+          <MenuItem mnemonicParsing="false" text="Action 2" />
+        </items>
+      </MenuButton>
+      <TextArea fx:id="descriptionField" layoutX="151.0" layoutY="189.0" prefHeight="78.0" prefWidth="188.0" />
+      <Label layoutX="32.0" layoutY="290.0" text="File path:" />
+      <Label layoutX="471.0" layoutY="54.0" prefHeight="23.0" prefWidth="50.0" text="IMBD">
+         <font>
+            <Font name="Impact" size="19.0" />
+         </font>
+      </Label>
+      <SVGPath content="&lt;svg width=&quot;24&quot; height=&quot;24&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; fill-rule=&quot;evenodd&quot; clip-rule=&quot;evenodd&quot;&gt;&lt;path d=&quot;M15.668 8.626l8.332 1.159-6.065 5.874 1.48 8.341-7.416-3.997-7.416 3.997 1.481-8.341-6.064-5.874 8.331-1.159 3.668-7.626 3.669 7.626zm-6.67.925l-6.818.948 4.963 4.807-1.212 6.825 6.068-3.271 6.069 3.271-1.212-6.826 4.964-4.806-6.819-.948-3.002-6.241-3.001 6.241z&quot;/&gt;&lt;/svg&gt;&lt;svg width=&quot;24&quot; height=&quot;24&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; fill-rule=&quot;evenodd&quot; clip-rule=&quot;evenodd&quot;&gt;&lt;path d=&quot;M15.668 8.626l8.332 1.159-6.065 5.874 1.48 8.341-7.416-3.997-7.416 3.997 1.481-8.341-6.064-5.874 8.331-1.159 3.668-7.626 3.669 7.626zm-6.67.925l-6.818.948 4.963 4.807-1.212 6.825 6.068-3.271 6.069 3.271-1.212-6.826 4.964-4.806-6.819-.948-3.002-6.241-3.001 6.241z&quot;/&gt;&lt;/svg&gt;" layoutX="454.0" layoutY="66.0" smooth="false" />
+      <Slider layoutX="463.0" layoutY="87.0" prefHeight="16.0" prefWidth="66.0" />
    </children>
 </AnchorPane>

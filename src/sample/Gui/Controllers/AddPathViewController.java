@@ -3,26 +3,52 @@ package sample.Gui.Controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import sample.Gui.Models.MovieModel;
 
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class AddPathViewController implements Initializable {
-    public AnchorPane anchorid;
-    public TextField pathToMovie;
+    @FXML
+    private AnchorPane anchorid;
+    @FXML
+    private TextField pathToMovie;
+    @FXML
+    private TextField yearField;
+    @FXML
+    private DatePicker releaseDateField;
+    @FXML
+    private TextArea descriptionField;
+    @FXML
+    private TextField movieTitleField;
+
+    private MovieModel mModel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-   
+    }
+
+    public void addMovie(){
+        String title = movieTitleField.getText();
+        String year = yearField.getText();
+        LocalDate date = releaseDateField.getValue();
+        //String category
+        String description = descriptionField.getText();
+        String moviePath = pathToMovie.getText();
+
+        mModel.addMovie(title,year, date, description, moviePath);
 
     }
 
@@ -44,8 +70,7 @@ public class AddPathViewController implements Initializable {
 
     }
 
-    public void openIt(ActionEvent actionEvent) throws IOException {
-        Desktop desktop = Desktop.getDesktop();
-        desktop.open(randomFile);
+    public void openIt(ActionEvent actionEvent)  {
+        addMovie();
     }
 }
