@@ -33,12 +33,13 @@
          </font>
       </Label>
       <Slider layoutX="463.0" layoutY="87.0" prefHeight="16.0" prefWidth="66.0" />
-      <Label layoutX="30.0" layoutY="173.0" text="Rating" />
-      <TextField fx:id="personalRating" layoutX="151.0" layoutY="168.0" prefHeight="27.0" prefWidth="68.0" />
+      <Label layoutX="30.0" layoutY="173.0" text="Personal Rating" />
+      <TextField fx:id="movieRating" layoutX="151.0" layoutY="168.0" prefHeight="27.0" prefWidth="68.0" />
       <Label layoutX="226.0" layoutY="173.0" text="Numbers 1-10 (in form 4.0)" />
       <ChoiceBox fx:id="categoriesList" layoutX="151.0" layoutY="109.0" prefWidth="150.0" />
       <ListView fx:id="addedCategories" layoutX="408.0" layoutY="154.0" prefHeight="72.0" prefWidth="149.0" />
       <Label layoutX="408.0" layoutY="128.0" text="Selected categories" />
-      <Button  layoutX="312.0" layoutY="109.0" mnemonicParsing="false" onAction="#addCategory" text="Button" />
+      <Button layoutX="312.0" layoutY="109.0" mnemonicParsing="false" onAction="#addCategory" text="Add" />
+      <Button layoutX="462.0" layoutY="237.0" mnemonicParsing="false" onAction="#deleteCategory" text="Trashcan Icon" />
    </children>
 </AnchorPane>

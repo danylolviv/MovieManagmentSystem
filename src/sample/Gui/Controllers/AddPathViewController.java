@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import sample.Be.Category;
+import sample.Be.Movie;
 import sample.Gui.Models.CategoryModel;
 import sample.Gui.Models.MovieModel;
 
@@ -55,8 +56,9 @@ public class AddPathViewController implements Initializable {
         String title = movieTitleField.getText();
         String moviePath = pathToMovie.getText();
         String mRaiting = personalRating.getText();
-        Double movieRating = Double.parseDouble(mRaiting);
-        mModel.addMovie(title, moviePath);
+        double raiting = Double.parseDouble(mRaiting);
+        Movie newMovie = new Movie(1,title,raiting,moviePath);
+        mModel.addMovie(newMovie);
 
     }
 
@@ -85,5 +87,9 @@ public class AddPathViewController implements Initializable {
     public void addCategory(ActionEvent actionEvent) {
         cat.add(categoriesList.getSelectionModel().getSelectedItem());
         addedCategories.setItems(cat);
+    }
+
+    public void deleteCategory(ActionEvent actionEvent) {
+        addedCategories.getItems().remove(addedCategories.getSelectionModel().getSelectedItem());
     }
 }
