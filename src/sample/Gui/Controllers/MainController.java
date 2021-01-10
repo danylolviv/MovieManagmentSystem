@@ -16,6 +16,7 @@ import sample.Bll.MovieManager;
 import sample.Dal.DAOCategory;
 import sample.Dal.DAOMovie;
 import sample.Be.Movie;
+import sample.Gui.Models.CategoryModel;
 import sample.Gui.Models.MovieModel;
 
 import java.io.IOException;
@@ -30,7 +31,7 @@ public class MainController implements Initializable {
     private ObservableList<Movie> movies;
 
     MovieModel movModel;
-
+    CategoryModel categoryModel;
     @FXML
     private ListView<Category> listCategory;
     @FXML
@@ -48,10 +49,8 @@ public class MainController implements Initializable {
     }
 
     public void getAllCategories(){
-        DAOCategory db = new DAOCategory();
-        categories = FXCollections.observableArrayList();
-        categories.addAll(db.getAllCategories());
-        listCategory.setItems(categories);
+        categoryModel = new CategoryModel();
+        listCategory.setItems(categoryModel.getAllCategories());
     }
 
     public void getAllMovies(){
@@ -73,6 +72,7 @@ public class MainController implements Initializable {
 
     public void openCategories(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/sample/Gui/Views/CategoriesView.fxml"));
+        //((AddPathViewController)loader.getController()).setModel(categoryModel);
         Stage pastaStage = new Stage();
         pastaStage.setTitle("Categories");
         pastaStage.setScene(new Scene(root));
@@ -80,7 +80,9 @@ public class MainController implements Initializable {
     }
 
     public void addPath(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/sample/Gui/Views/AddPathView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/Gui/Views/AddPathView.fxml"));
+        Parent root = loader.load();
+        ((AddPathViewController)loader.getController()).setCategories(listCategory.getItems());
         Stage pastaStage = new Stage();
         pastaStage.setTitle("Pasta");
         pastaStage.setScene(new Scene(root));

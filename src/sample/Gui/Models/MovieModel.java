@@ -26,8 +26,8 @@ public class MovieModel {
         movies.setAll(movieManager.getAllMovies());
     }
 
-    public void addMovie(String title, String year, LocalDate releaseDate, String Description, String moviePath){
-        //movieManager.addMovie(new Movie(1, title, ));
+    public void addMovie(String title,  String moviePath){
+
     }
 
     public ObservableList<Movie> searchedMovies(String searchQuery){
