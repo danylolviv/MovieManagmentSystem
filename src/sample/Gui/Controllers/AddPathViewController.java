@@ -17,6 +17,8 @@ import sample.Gui.Models.MovieModel;
 
 import java.io.File;
 import java.net.URL;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -57,7 +59,9 @@ public class AddPathViewController implements Initializable {
         String moviePath = pathToMovie.getText();
         String mRaiting = personalRating.getText();
         double raiting = Double.parseDouble(mRaiting);
-        Movie newMovie = new Movie(1,title,raiting,moviePath);
+        LocalDate date = java.time.LocalDate.now();
+        Movie newMovie = new Movie(1,title,raiting,moviePath,date);
+        mModel = new MovieModel();
         mModel.addMovie(newMovie);
 
     }
@@ -74,7 +78,6 @@ public class AddPathViewController implements Initializable {
 
 
         if (fl != null){
-            System.out.println("Path : " + fl.getPath() );
             pathToMovie.setText(fl.getPath());
         }
 

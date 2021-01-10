@@ -20,7 +20,7 @@ public class MovieManager {
     }
 
     public void addMovie(Movie movie){
-
+        daoMovie.addMovie(movie);
     }
 
     public ObservableList<Movie> searchMovies(ObservableList<Movie> queriedMovies, String searchQuery) {
