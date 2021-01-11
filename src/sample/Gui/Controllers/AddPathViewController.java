@@ -10,14 +10,17 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import sample.Be.CatMovie;
 import sample.Be.Category;
 import sample.Be.Movie;
 import sample.Gui.Models.CategoryModel;
+import sample.Gui.Models.CategoryMovieModel;
 import sample.Gui.Models.MovieModel;
 
 import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -61,9 +64,21 @@ public class AddPathViewController implements Initializable {
         double raiting = Double.parseDouble(mRaiting);
         LocalDate date = java.time.LocalDate.now();
         Movie newMovie = new Movie(1,title,raiting,moviePath,date);
+        System.out.println(newMovie.toString());
         mModel = new MovieModel();
         mModel.addMovie(newMovie);
 
+        List<Category> listCat = addedCategories.getItems();
+        addMovieCat(title, listCat);
+    }
+
+    public void addMovieCat(String title,List<Category> listCat ) {
+        List<CatMovie> listOfCategoriesAndMovies = new ArrayList<>();
+        for(Category c: listCat){
+            listOfCategoriesAndMovies.add(new CatMovie(c.getID(), title));
+        }
+        CategoryMovieModel catMovModel = new CategoryMovieModel();
+        catMovModel.addMovieCat(listOfCategoriesAndMovies);
     }
 
     private File randomFile;

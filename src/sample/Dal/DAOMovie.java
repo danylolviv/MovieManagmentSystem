@@ -36,13 +36,15 @@ public class DAOMovie {
     }
 
     public void addMovie(Movie movie) {
+
         try(Connection con = dataAccess.getConnection()){
-            String sql = "INSERT INTO Movie_Data (title,rating,filelink,lastview) VALUES (?,(SELECT id FROM Artist WHERE artist=?),(SELECT id FROM Category WHERE category=?),?)";
+
+            String sql = "INSERT INTO Movie_Data (title,rating,filelink,lastview) VALUES (?,?,?,?)";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setString(1, movie.getTitle());
-            statement.setString(2, movie.getDate().toString());
+            statement.setString(2, movie.getRating().toString());
             statement.setString(3, movie.getPath());
-           /* statement.setDate(4, movie.getDate());*/
+            statement.setDate(4, Date.valueOf(java.time.LocalDate.now()));
             statement.executeUpdate();
 
         } catch (SQLException ex) {
