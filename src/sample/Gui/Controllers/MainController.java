@@ -12,17 +12,12 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import sample.Be.Category;
-import sample.Bll.MovieManager;
-import sample.Dal.DAOCategory;
-import sample.Dal.DAOMovie;
 import sample.Be.Movie;
 import sample.Gui.Models.CategoryModel;
 import sample.Gui.Models.MovieModel;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -62,10 +57,11 @@ public class MainController implements Initializable {
 
     @FXML
     private void openWindow(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/sample/Gui/Views/Sidechick.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/sample/Gui/Views/Library.fxml"));
         Stage stage = new Stage();
-        stage.setTitle("Sidechick");
+        stage.setTitle("Library");
         stage.setScene(new Scene(root));
+        stage.setResizable(false);
         stage.show();
     }
 
