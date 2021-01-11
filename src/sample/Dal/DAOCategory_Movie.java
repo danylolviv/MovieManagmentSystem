@@ -13,7 +13,7 @@ public class DAOCategory_Movie {
 
     public void addCategoryMovie(List<CatMovie> list) {
 
-        getLatestId();
+        int id = getLatestId();
 
         try (Connection con = dataAccess.getConnection()) {
 
@@ -22,36 +22,31 @@ public class DAOCategory_Movie {
 
             for (CatMovie cM : list) {
                 statement.setInt(1, cM.getId());
-                //statement.setInt();
+                statement.setInt(2, id);
+                statement.executeUpdate();
             }
-
-           /* statement.setString(1, movie.getTitle());
-            statement.setString(2, movie.getRating().toString());
-            statement.setString(3, movie.getPath());
-            statement.setDate(4, Date.valueOf(java.time.LocalDate.now()));
-            statement.executeUpdate();*/
-
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
 
     }
 
-    public void getLatestId() {
+    public int getLatestId() {
 
         dataAccess = new DataAccess();
 
+        int lastMovieId = 0;
+
         try (Connection con = dataAccess.getConnection()) {
-            String sql = "SELECT max(id) FROM table;";
+            String sql = "SELECT max(movie_id) FROM Movie_Data;";
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
-
-            System.out.println(rs);
-
-
+            rs.next();
+            lastMovieId = rs.getInt(1);
         } catch (SQLException ex) {
             ex.printStackTrace();
 
         }
+        return lastMovieId;
     }
 }
