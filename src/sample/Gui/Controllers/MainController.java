@@ -67,10 +67,7 @@ public class MainController implements Initializable {
     }
 
     public void getAllMovies(){
-
-        movies = FXCollections.observableArrayList();
-        movies.addAll(movModel.getMovies());
-        listMovie.setItems(movies);
+        listMovie.setItems(movModel.getMovies());
     }
 
     public void removeMovie(int movieId){

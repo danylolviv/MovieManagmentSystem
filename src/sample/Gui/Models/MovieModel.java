@@ -23,12 +23,13 @@ public class MovieModel {
     }
 
     public void updateMovieList(){
+        System.out.println("got the movies ");
         movies.setAll(movieManager.getAllMovies());
     }
 
     public void addMovie(Movie movie){
         movieManager.addMovie(movie);
-        getMovies();
+        updateMovieList();
     }
 
     public void deleteMovie(int movieId){
