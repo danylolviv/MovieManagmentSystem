@@ -29,6 +29,7 @@ public class AddPathViewController implements Initializable {
 
 
     CategoryModel categoryModel;
+    private File randomFile;
 
     @FXML
     private ListView addedCategories;
@@ -80,12 +81,16 @@ public class AddPathViewController implements Initializable {
         catMovModel.addMovieCat(listOfCategoriesAndMovies);
     }
 
-    private File randomFile;
+
 
     public void findFile(ActionEvent actionEvent) {
         final FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("OpenFileDialog");
         Stage stage = (Stage) anchorid.getScene().getWindow();
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Video", "*.mp4"),
+                new FileChooser.ExtensionFilter("Video", "*.mpeg4")
+        );
         File fl = fileChooser.showOpenDialog(stage);
         randomFile = fl;
 
@@ -99,6 +104,7 @@ public class AddPathViewController implements Initializable {
 
     public void openIt(ActionEvent actionEvent)  {
         addMovie();
+
     }
 
     public void addCategory(ActionEvent actionEvent) {
