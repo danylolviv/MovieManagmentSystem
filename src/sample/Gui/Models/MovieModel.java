@@ -35,4 +35,7 @@ public class MovieModel {
         return movieManager.searchMovies(movies,searchQuery);
     }
 
+    public ObservableList<Movie> searchedMovies(String searchQuery, Double minRating, Double maxRating) {
+        return movieManager.searchMovies(movies,searchQuery,minRating,maxRating);
+    }
 }

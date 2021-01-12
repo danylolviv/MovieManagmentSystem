@@ -8,8 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import sample.Be.Category;
 import sample.Be.Movie;
@@ -22,6 +21,13 @@ import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
 
+    Double ratingSearchA;
+    Double ratingSearchB;
+    boolean ratingSearch;
+    int rsbCounter = 1;
+
+    public Button ratingSearchButton;
+    public Slider ratingSearchSlider;
     private ObservableList<Category> categories;
     private ObservableList<Movie> movies;
 
@@ -39,7 +45,11 @@ public class MainController implements Initializable {
         getAllMovies();
 
         typeField.textProperty().addListener((observableValue, s, t1) -> {
-            listMovie.setItems(movModel.searchedMovies(t1));
+            if(ratingSearch){
+                if(ratingSearchA<=ratingSearchB)listMovie.setItems(movModel.searchedMovies(t1,ratingSearchA,ratingSearchB));
+                if(ratingSearchB<ratingSearchA)listMovie.setItems(movModel.searchedMovies(t1,ratingSearchB,ratingSearchA));
+            }
+            else listMovie.setItems(movModel.searchedMovies(t1));
         });
     }
 
@@ -86,4 +96,29 @@ public class MainController implements Initializable {
     }
 
 
+    public void shiftRatingSearch(ActionEvent actionEvent) {
+        System.out.println("wtf");
+        if(rsbCounter == 1) {
+            ratingSearchA = ratingSearchSlider.getValue();
+            ratingSearchButton.setText("to");
+            rsbCounter = 2;
+        }
+        if(rsbCounter == 2) {
+            ratingSearchB = ratingSearchSlider.getValue();
+            ratingSearchButton.setText("confirm");
+            rsbCounter = 3;
+        }
+        if(rsbCounter == 3) {
+            ratingSearchSlider.setDisable(true);
+            ratingSearch = true;
+            ratingSearchButton.setText("reset");
+            rsbCounter = 4;
+        }
+        if(rsbCounter == 4) {
+            ratingSearchSlider.setDisable(false);
+            ratingSearch = false;
+            ratingSearchButton.setText("from");
+            rsbCounter = 1;
+        }
+    }
 }

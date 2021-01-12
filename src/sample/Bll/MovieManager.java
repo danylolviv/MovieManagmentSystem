@@ -36,6 +36,19 @@ public class MovieManager {
         return foundMovies;
     }
 
+    public ObservableList<Movie> searchMovies(ObservableList<Movie> queriedMovies, String searchQuery, Double minRating, Double maxRating) {
+        ObservableList<Movie> foundMovies;
+        foundMovies = FXCollections.observableArrayList();
+        for(Movie m: queriedMovies){
+            String title = m.getTitle().toLowerCase();
+            Double rating = m.getRating();
+            String query = searchQuery.toLowerCase();
+            if (title.contains(query) && rating>=minRating && rating<=maxRating){
+                foundMovies.add(m);
+            }
+        }
+        return foundMovies;
+    }
 }
 
 
