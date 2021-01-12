@@ -27,8 +27,11 @@ public class MovieModel {
     }
 
     public void addMovie(Movie movie){
-        movieManager = new MovieManager();
         movieManager.addMovie(movie);
+    }
+
+    public void deleteMovie(int movieId){
+        movieManager.deleteMovie(movieId);
     }
 
     public ObservableList<Movie> searchedMovies(String searchQuery){

@@ -10,7 +10,7 @@ public class CatMovieManager {
 
     public void addCategoryMovie(List<CatMovie> list){
         catMovieDAO = new DAOCategory_Movie();
-        catMovieDAO.getLatestId();
+        catMovieDAO.addCategoryMovie(list);
     }
 
 }

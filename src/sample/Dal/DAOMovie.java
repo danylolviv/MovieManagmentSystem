@@ -51,4 +51,16 @@ public class DAOMovie {
             ex.printStackTrace();
         }
     }
+    //DELETE FROM Movie_Data WHERE movie_id=48;
+    public void deleteMovie(int movieId){
+        System.out.println(movieId);
+        try(Connection con = dataAccess.getConnection()){
+        String sql = "DELETE FROM Movie_Data WHERE movie_id = ?";
+        PreparedStatement statement = con.prepareStatement(sql);
+        statement.setInt(1,movieId);
+        statement.executeUpdate();
+        }catch (SQLException ex){
+            ex.printStackTrace();
+        }
+    }
 }

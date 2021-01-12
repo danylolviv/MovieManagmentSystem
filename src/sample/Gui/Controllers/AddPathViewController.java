@@ -64,7 +64,6 @@ public class AddPathViewController implements Initializable {
         double raiting = Double.parseDouble(mRaiting);
         LocalDate date = java.time.LocalDate.now();
         Movie newMovie = new Movie(1,title,raiting,moviePath,date);
-        System.out.println(newMovie.toString());
         mModel = new MovieModel();
         mModel.addMovie(newMovie);
 

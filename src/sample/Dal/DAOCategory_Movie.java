@@ -15,6 +15,9 @@ public class DAOCategory_Movie {
 
         int id = getLatestId();
 
+        for (CatMovie ct: list){
+           System.out.println("Category id: " + ct.getId() + "  " + "Movie id: " + id);
+        }
         try (Connection con = dataAccess.getConnection()) {
 
             String sql = "INSERT INTO CatMovie (category_id, movie_id) VALUES (?,?)";

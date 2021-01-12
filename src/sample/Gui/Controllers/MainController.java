@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import sample.Be.Category;
 import sample.Be.Movie;
@@ -17,6 +18,8 @@ import sample.Gui.Models.MovieModel;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -41,6 +44,7 @@ public class MainController implements Initializable {
     private TextField typeField;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        movModel = new MovieModel();
         getAllCategories();
         getAllMovies();
 
@@ -59,10 +63,14 @@ public class MainController implements Initializable {
     }
 
     public void getAllMovies(){
-        movModel = new MovieModel();
+
         movies = FXCollections.observableArrayList();
         movies.addAll(movModel.getMovies());
         listMovie.setItems(movies);
+    }
+
+    public void removeMovie(int movieId){
+        movModel.deleteMovie(movieId);
     }
 
     @FXML
@@ -120,5 +128,18 @@ public class MainController implements Initializable {
             ratingSearchButton.setText("from");
             rsbCounter = 1;
         }
+    }
+
+    public void removeMovie(ActionEvent actionEvent) {
+        if(listMovie.getSelectionModel().getSelectedItems() != null){
+            removeMovie(listMovie.getSelectionModel().getSelectedItem().getId());
+            listMovie.getItems().remove(listMovie.getSelectionModel().getSelectedItem());
+        }
+    }
+
+
+
+    public void playMovie(KeyEvent keyEvent) {
+
     }
 }

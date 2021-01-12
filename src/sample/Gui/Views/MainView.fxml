@@ -36,7 +36,7 @@
                   <Font name="System Bold" size="17.0" />
                </font>
             </Label>
-            <ListView id="pane" fx:id="listMovie" layoutX="345.0" layoutY="87.0" prefHeight="607.0" prefWidth="333.0" stylesheets="@../Css/ListView.css" />
+            <ListView id="pane" fx:id="listMovie" layoutX="345.0" layoutY="87.0" onKeyPressed="#playMovie" prefHeight="607.0" prefWidth="333.0" stylesheets="@../Css/ListView.css" />
             <Pane fx:id="infoBox" layoutX="812.0" layoutY="87.0" prefHeight="285.0" prefWidth="447.0" />
             <Label layoutX="1019.0" layoutY="54.0" prefHeight="26.0" prefWidth="34.0" text="Info" textFill="WHITE">
                <font>
@@ -67,6 +67,7 @@
                </font>
             </Button>
             <Slider fx:id="ratingSearchSlider" blockIncrement="1.0" layoutX="988.0" layoutY="13.0" majorTickUnit="2.0" max="10.0" minorTickCount="1" prefHeight="38.0" prefWidth="135.0" showTickLabels="true" showTickMarks="true" />
+            <Button fx:id="removeMovie" layoutX="985.0" layoutY="667.0" mnemonicParsing="false" onAction="#removeMovie" text=" Remove Movie" />
          </children>
       </AnchorPane>
    </children>
