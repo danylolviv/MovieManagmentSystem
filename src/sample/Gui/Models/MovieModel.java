@@ -28,6 +28,7 @@ public class MovieModel {
 
     public void addMovie(Movie movie){
         movieManager.addMovie(movie);
+        getMovies();
     }
 
     public void deleteMovie(int movieId){
