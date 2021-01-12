@@ -9,6 +9,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import sample.Be.Category;
@@ -16,6 +18,8 @@ import sample.Be.Movie;
 import sample.Gui.Models.CategoryModel;
 import sample.Gui.Models.MovieModel;
 
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -139,7 +143,13 @@ public class MainController implements Initializable {
 
 
 
-    public void playMovie(KeyEvent keyEvent) {
+    public void playMovie(KeyEvent keyEvent) throws IOException {
+        String pathTo = listMovie.getSelectionModel().getSelectedItem().getPath();
+        if (pathTo != null){
+            File video = new File(pathTo);
+            Desktop desktop = Desktop.getDesktop();
+            desktop.open(video);
+        }
 
     }
 }

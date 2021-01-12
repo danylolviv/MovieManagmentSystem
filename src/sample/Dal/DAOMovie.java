@@ -26,7 +26,8 @@ public class DAOMovie {
                 int id = rs.getInt("movie_id");
                 String title = rs.getString("title");
                 Double rating = rs.getDouble("rating");
-                Movie movie = new Movie(id, title, rating, null, null);
+                String pathTo = rs.getString("filelink");
+                Movie movie = new Movie(id, title, rating, pathTo, null);
                 movies.add(movie);
             }
         } catch (SQLException ex) {
