@@ -104,7 +104,7 @@ public class MainController implements Initializable {
         Parent root = loader.load();
         ((AddPathViewController)loader.getController()).setCategories(listCategory.getItems());
         Stage pastaStage = new Stage();
-        pastaStage.setTitle("Pasta");
+        pastaStage.setTitle("Movie Settings");
         pastaStage.setScene(new Scene(root));
         pastaStage.show();
     }
@@ -125,7 +125,6 @@ public class MainController implements Initializable {
                 ratingSearch = true;
                 ratingSearchButton.setText("reset");
 
-                //this no workie lol idk why
                 if(ratingSearchA == ratingSearchB) ratingSearchRangeLbl.setText("rated: " + ratingSearchA);
                 else ratingSearchRangeLbl.setText(ratingSearchA + " to " + ratingSearchB);
 
