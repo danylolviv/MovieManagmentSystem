@@ -41,5 +41,6 @@
       <Label layoutX="408.0" layoutY="128.0" text="Selected categories" />
       <Button layoutX="312.0" layoutY="109.0" mnemonicParsing="false" onAction="#addCategory" text="Add" />
       <Button layoutX="462.0" layoutY="237.0" mnemonicParsing="false" onAction="#deleteCategory" text="Trashcan Icon" />
+      <Button fx:id="close" layoutX="328.0" layoutY="342.0" mnemonicParsing="false" onAction="#closeWindow" text="Close" />
    </children>
 </AnchorPane>

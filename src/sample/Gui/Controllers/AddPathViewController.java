@@ -28,7 +28,9 @@ import java.util.ResourceBundle;
 public class AddPathViewController implements Initializable {
 
 
+
     CategoryModel categoryModel;
+    private File randomFile;
 
     @FXML
     private ListView addedCategories;
@@ -42,6 +44,8 @@ public class AddPathViewController implements Initializable {
     private TextField pathToMovie;
     @FXML
     private TextField movieTitleField;
+    @FXML
+    private Button close;
 
     private MovieModel mModel;
     private List<Category> categories;
@@ -69,6 +73,7 @@ public class AddPathViewController implements Initializable {
 
         List<Category> listCat = addedCategories.getItems();
         addMovieCat(title, listCat);
+        closeWindow();
     }
 
     public void addMovieCat(String title,List<Category> listCat ) {
@@ -80,12 +85,16 @@ public class AddPathViewController implements Initializable {
         catMovModel.addMovieCat(listOfCategoriesAndMovies);
     }
 
-    private File randomFile;
+
 
     public void findFile(ActionEvent actionEvent) {
         final FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("OpenFileDialog");
         Stage stage = (Stage) anchorid.getScene().getWindow();
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Video", "*.mp4"),
+                new FileChooser.ExtensionFilter("Video", "*.mpeg4")
+        );
         File fl = fileChooser.showOpenDialog(stage);
         randomFile = fl;
 
@@ -99,6 +108,7 @@ public class AddPathViewController implements Initializable {
 
     public void openIt(ActionEvent actionEvent)  {
         addMovie();
+
     }
 
     public void addCategory(ActionEvent actionEvent) {
@@ -108,5 +118,11 @@ public class AddPathViewController implements Initializable {
 
     public void deleteCategory(ActionEvent actionEvent) {
         addedCategories.getItems().remove(addedCategories.getSelectionModel().getSelectedItem());
+    }
+
+
+    public void closeWindow() {
+        Stage stage = (Stage) close.getScene().getWindow();
+        stage.close();
     }
 }

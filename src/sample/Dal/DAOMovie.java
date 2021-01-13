@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import sample.Be.Movie;
+import sample.Bll.MovieManager;
 
 
 public class DAOMovie {
