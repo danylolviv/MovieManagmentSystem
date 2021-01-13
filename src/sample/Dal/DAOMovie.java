@@ -64,4 +64,19 @@ public class DAOMovie {
             ex.printStackTrace();
         }
     }
+
+    public void changeMovieRating(Movie movie){
+        System.out.println(movie.getTitle() + " rating is set " + movie.getRating());
+        String sql = "UPDATE Movie_Data SET rating = ?, title = ?, filelink = ? WHERE movie_id = ?";
+        try(Connection con = dataAccess.getConnection()){
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setInt(1, movie.getId());
+            statement.setString(2, movie.getTitle());
+            statement.setDouble(3, movie.getRating());
+            statement.setString(4, movie.getPath());
+            statement.executeUpdate();
+        }catch (SQLException ex){
+            ex.printStackTrace();
+        }
+    }
 }

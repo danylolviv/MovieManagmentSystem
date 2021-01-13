@@ -34,6 +34,10 @@ public class MovieModel {
         movieManager.deleteMovie(movieId);
     }
 
+    public void changeMovieRating(Movie movie){
+        movieManager.changeMovieRating(movie);
+    }
+
     public ObservableList<Movie> searchedMovies(String searchQuery){
         return movieManager.searchMovies(movies,searchQuery);
     }

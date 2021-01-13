@@ -10,9 +10,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import org.controlsfx.control.Rating;
 import sample.Be.Category;
 import sample.Be.Movie;
 import sample.Gui.Models.CategoryModel;
@@ -28,6 +32,8 @@ import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
 
+    public Rating ratingMovie;
+    public Label titleView;
     Double ratingSearchA;
     Double ratingSearchB;
     boolean ratingSearch;
@@ -46,6 +52,10 @@ public class MainController implements Initializable {
     private ListView<Movie> listMovie;
     @FXML
     private TextField typeField;
+    private Movie selected;
+    private double ratingOf;
+    private double rating;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         movModel = new MovieModel();
@@ -151,5 +161,20 @@ public class MainController implements Initializable {
             desktop.open(video);
         }
 
+    }
+
+    public void getSelectedMovie(MouseEvent mouseEvent) {
+        selected = listMovie.getSelectionModel().getSelectedItem();
+        ratingOf = selected.getRating() * 0.5;
+        ratingMovie.setRating(ratingOf);
+        titleView.setText(selected.getTitle());
+    }
+
+    public void setRating(MouseEvent mouseEvent) {
+        rating = ratingMovie.getRating() * 2;
+        double roudedRating = Math.round(rating * 10.0)/10.0;
+        selected.setRating(roudedRating);
+        movModel.changeMovieRating(selected);
+        getAllMovies();
     }
 }

@@ -30,6 +30,10 @@ public class Movie {
         return rating;
     }
 
+    public void setRating(double rating){
+        this.rating = rating;
+    }
+
     @Override
     public String toString() {
         return title + "     " + rating;
