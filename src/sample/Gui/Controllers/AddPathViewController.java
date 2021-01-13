@@ -7,9 +7,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.controlsfx.control.Rating;
 import sample.Be.CatMovie;
 import sample.Be.Category;
 import sample.Be.Movie;
@@ -31,13 +33,12 @@ public class AddPathViewController implements Initializable {
 
     CategoryModel categoryModel;
     private File randomFile;
+    public Rating ratingMovie;
 
     @FXML
     private ListView addedCategories;
     @FXML
     public ChoiceBox<Category> categoriesList;
-    @FXML
-    private TextField personalRating;
     @FXML
     private AnchorPane anchorid;
     @FXML
@@ -50,6 +51,7 @@ public class AddPathViewController implements Initializable {
     private MovieModel mModel;
     private List<Category> categories;
     private ObservableList cat = FXCollections.observableArrayList();
+    private Double ratingStars;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -64,13 +66,11 @@ public class AddPathViewController implements Initializable {
     public void addMovie(){
         String title = movieTitleField.getText();
         String moviePath = pathToMovie.getText();
-        String mRaiting = personalRating.getText();
-        double raiting = Double.parseDouble(mRaiting);
+        double raiting = ratingStars;
         LocalDate date = java.time.LocalDate.now();
         Movie newMovie = new Movie(1,title,raiting,moviePath,date);
         mModel = new MovieModel();
         mModel.addMovie(newMovie);
-
         List<Category> listCat = addedCategories.getItems();
         addMovieCat(title, listCat);
         closeWindow();
@@ -124,5 +124,11 @@ public class AddPathViewController implements Initializable {
     public void closeWindow() {
         Stage stage = (Stage) close.getScene().getWindow();
         stage.close();
+    }
+
+    public void setRating(MouseEvent mouseEvent) {
+        double rating = ratingMovie.getRating() * 2;
+        double roudedRating = Math.round(rating * 10.0)/10.0;
+        ratingStars = roudedRating;
     }
 }
