@@ -28,6 +28,11 @@ public class MovieManager {
         daoMovie.deleteMovie(movieID);
     }
 
+    public void changeMovieRating(Movie movie){
+        daoMovie.changeMovieRating(movie);
+    }
+
+
     public ObservableList<Movie> searchMovies(ObservableList<Movie> queriedMovies, String searchQuery) {
         ObservableList<Movie> foundMovies;
         foundMovies = FXCollections.observableArrayList();
