@@ -10,8 +10,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import sample.Be.Category;
 import sample.Be.Movie;
@@ -28,10 +30,11 @@ import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
 
+    public Label ratingSearchRangeLbl;
     Double ratingSearchA;
     Double ratingSearchB;
     boolean ratingSearch;
-    int rsbCounter = 1;
+    List<Category> searchedCategories = new ArrayList<Category>();
 
     public Button ratingSearchButton;
     public Slider ratingSearchSlider;
@@ -51,13 +54,10 @@ public class MainController implements Initializable {
         movModel = new MovieModel();
         getAllCategories();
         getAllMovies();
+        listCategory.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         typeField.textProperty().addListener((observableValue, s, t1) -> {
-            if(ratingSearch){
-                if(ratingSearchA<=ratingSearchB)listMovie.setItems(movModel.searchedMovies(t1,ratingSearchA,ratingSearchB));
-                if(ratingSearchB<ratingSearchA)listMovie.setItems(movModel.searchedMovies(t1,ratingSearchB,ratingSearchA));
-            }
-            else listMovie.setItems(movModel.searchedMovies(t1));
+            searchMovies();
         });
     }
 
@@ -105,29 +105,35 @@ public class MainController implements Initializable {
     }
 
 
-    public void shiftRatingSearch(ActionEvent actionEvent) {
-        System.out.println("wtf");
-        if(rsbCounter == 1) {
-            ratingSearchA = ratingSearchSlider.getValue();
-            ratingSearchButton.setText("to");
-            rsbCounter = 2;
-        }
-        if(rsbCounter == 2) {
-            ratingSearchB = ratingSearchSlider.getValue();
-            ratingSearchButton.setText("confirm");
-            rsbCounter = 3;
-        }
-        if(rsbCounter == 3) {
-            ratingSearchSlider.setDisable(true);
-            ratingSearch = true;
-            ratingSearchButton.setText("reset");
-            rsbCounter = 4;
-        }
-        if(rsbCounter == 4) {
-            ratingSearchSlider.setDisable(false);
-            ratingSearch = false;
-            ratingSearchButton.setText("from");
-            rsbCounter = 1;
+    public void shiftRatingSearch() {
+        switch (ratingSearchButton.getText()) {
+            case "from:" -> {
+                ratingSearchA = ratingSearchSlider.getValue();
+                ratingSearchButton.setText("to:");
+            }
+            case "to:" -> {
+                ratingSearchB = ratingSearchSlider.getValue();
+                ratingSearchButton.setText("confirm");
+            }
+            case "confirm" -> {
+                ratingSearchSlider.setVisible(false);
+                ratingSearch = true;
+                ratingSearchButton.setText("reset");
+
+                //this no workie lol idk why
+                if(ratingSearchA == ratingSearchB) ratingSearchRangeLbl.setText("rated: " + ratingSearchA);
+                else ratingSearchRangeLbl.setText(ratingSearchA + " to " + ratingSearchB);
+
+                ratingSearchRangeLbl.setVisible(true);
+                searchMovies();
+            }
+            case "reset" -> {
+                ratingSearchRangeLbl.setVisible(false);
+                ratingSearchSlider.setVisible(true);
+                ratingSearch = false;
+                ratingSearchButton.setText("from:");
+                searchMovies();
+            }
         }
     }
 
@@ -148,5 +154,30 @@ public class MainController implements Initializable {
             desktop.open(video);
         }
 
+    }
+
+    public void categorySearch() {
+        searchedCategories.clear();
+        searchedCategories.addAll(listCategory.getSelectionModel().getSelectedItems());
+        for (Category c:searchedCategories
+             ) {
+            System.out.println(c.getName());
+        }
+    }
+
+    private void searchMovies(){
+        String query = typeField.getText();
+        if(ratingSearch){
+            if(ratingSearchA<=ratingSearchB){
+                if(!searchedCategories.isEmpty()) listMovie.setItems(movModel.searchedMovies(query,searchedCategories,ratingSearchA,ratingSearchB));
+                else listMovie.setItems(movModel.searchedMovies(query,ratingSearchA,ratingSearchB));
+            }
+            if(ratingSearchB<ratingSearchA){
+                if(!searchedCategories.isEmpty()) listMovie.setItems(movModel.searchedMovies(query,searchedCategories,ratingSearchB,ratingSearchA));
+                else listMovie.setItems(movModel.searchedMovies(query,ratingSearchB,ratingSearchA));
+            }
+        }
+        else if(!searchedCategories.isEmpty()) listMovie.setItems(movModel.searchedMovies(query,searchedCategories));
+        else listMovie.setItems(movModel.searchedMovies(query));
     }
 }
