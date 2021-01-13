@@ -58,7 +58,7 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         movModel = new MovieModel();
         getAllCategories();
-        getAllMovies();
+        listMovie.setItems(movModel.getMovies());
         listCategory.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         typeField.textProperty().addListener((observableValue, s, t1) -> {

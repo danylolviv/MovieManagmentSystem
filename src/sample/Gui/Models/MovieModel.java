@@ -16,7 +16,7 @@ public class MovieModel {
     public MovieModel(){
         movieManager = new MovieManager();
         movies = FXCollections.observableArrayList();
-        updateMovieList();
+        movies.setAll(movieManager.getAllMovies());
     }
 
     public ObservableList<Movie> getMovies() {
@@ -24,7 +24,6 @@ public class MovieModel {
     }
 
     public void updateMovieList(){
-        System.out.println("got the movies ");
         movies.setAll(movieManager.getAllMovies());
     }
 

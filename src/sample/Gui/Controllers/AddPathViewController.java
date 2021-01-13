@@ -73,6 +73,7 @@ public class AddPathViewController implements Initializable {
         mModel.addMovie(newMovie);
         List<Category> listCat = addedCategories.getItems();
         addMovieCat(title, listCat);
+        mModel.updateMovieList();
         closeWindow();
     }
 

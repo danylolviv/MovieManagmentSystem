@@ -4,15 +4,15 @@
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/org/controlsfx/controlsfx/11.0.0/controlsfx-11.0.0.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-base/11/javafx-base-11.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-base/11/javafx-base-11-win.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-base/11/javafx-base-11-mac.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/11/javafx-graphics-11.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/11/javafx-graphics-11-win.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/11/javafx-graphics-11-mac.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-controls/11/javafx-controls-11.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-controls/11/javafx-controls-11-win.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-controls/11/javafx-controls-11-mac.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-media/11/javafx-media-11.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-media/11/javafx-media-11-win.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-media/11/javafx-media-11-mac.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-web/11/javafx-web-11.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-web/11/javafx-web-11-win.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-web/11/javafx-web-11-mac.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
