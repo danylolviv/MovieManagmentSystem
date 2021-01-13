@@ -1,22 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.Slider?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.InnerShadow?>
-<?import javafx.scene.effect.Light.Distant?>
-<?import javafx.scene.effect.Lighting?>
-<?import javafx.scene.effect.PerspectiveTransform?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
-<?import org.controlsfx.control.Rating?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.controlsfx.control.*?>
 
 <GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Gui.Controllers.MainController">
    <columnConstraints>
@@ -28,7 +17,7 @@
    <children>
       <AnchorPane id="pane" maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../Css/Main.css">
          <children>
-            <Button id="pane" layoutX="241.0" layoutY="4.0" mnemonicParsing="false" onAction="#openWindow" prefHeight="25.0" prefWidth="102.0" stylesheets="@../Css/ListView.css" text="Library" textFill="WHITE" />
+            <Button id="pane" layoutX="131.0" layoutY="4.0" mnemonicParsing="false" onAction="#openWindow" prefHeight="25.0" prefWidth="102.0" stylesheets="@../Css/ListView.css" text="Library" textFill="WHITE" />
             <ListView id="pane" fx:id="listCategory" layoutX="22.0" layoutY="87.0" onMouseClicked="#categorySearch" prefHeight="607.0" prefWidth="181.0" stylesheets="@../Css/ListView.css">
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -37,8 +26,7 @@
                <font>
                   <Font name="System Bold" size="17.0" />
                </font></Label>
-            <Button id="pane" layoutX="126.0" layoutY="4.0" mnemonicParsing="false" onAction="#addPath" prefHeight="25.0" prefWidth="102.0" styleClass="red" stylesheets="@../Css/ListView.css" text="Add Movie" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
-            <Button id="pane" layoutX="11.0" layoutY="4.0" mnemonicParsing="false" onAction="#openCategories" prefHeight="25.0" prefWidth="102.0" styleClass="red" stylesheets="@../Css/ListView.css" text="Categories" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
+            <Button id="pane" layoutX="14.0" layoutY="4.0" mnemonicParsing="false" onAction="#addPath" prefHeight="25.0" prefWidth="102.0" styleClass="red" stylesheets="@../Css/ListView.css" text="Movie Settings" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
             <TextField fx:id="typeField" layoutX="1130.0" layoutY="4.0" prefHeight="25.0" prefWidth="135.0" promptText="search...." stylesheets="@../Css/Main.css" />
             <Label layoutX="483.0" layoutY="54.0" prefHeight="26.0" prefWidth="58.0" text="Movies" textFill="WHITE">
                <font>
