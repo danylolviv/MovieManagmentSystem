@@ -93,10 +93,10 @@ public class MainController implements Initializable {
     public void openCategories(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/sample/Gui/Views/CategoriesView.fxml"));
         //((AddPathViewController)loader.getController()).setModel(categoryModel);
-        Stage pastaStage = new Stage();
-        pastaStage.setTitle("Categories");
-        pastaStage.setScene(new Scene(root));
-        pastaStage.show();
+        Stage stage = new Stage();
+        stage.setTitle("Categories");
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     public void addPath(ActionEvent actionEvent) throws IOException {
