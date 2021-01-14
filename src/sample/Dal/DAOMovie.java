@@ -56,8 +56,15 @@ public class DAOMovie {
     //DELETE FROM Movie_Data WHERE movie_id=48;
     public void deleteMovie(int movieId){
         System.out.println(movieId);
+        /*deleteFromCatMovie(movieId);*/
         try(Connection con = dataAccess.getConnection()){
-        String sql = "DELETE FROM Movie_Data WHERE movie_id = ?";
+
+            String sql1 = "DELETE FROM CatMovie WHERE movie_id = ?";
+            PreparedStatement statement1 = con.prepareStatement(sql1);
+            statement1.setInt(1,movieId);
+            statement1.executeUpdate();
+
+            String sql = "DELETE FROM Movie_Data WHERE movie_id = ?";
         PreparedStatement statement = con.prepareStatement(sql);
         statement.setInt(1,movieId);
         statement.executeUpdate();
@@ -65,6 +72,17 @@ public class DAOMovie {
             ex.printStackTrace();
         }
     }
+
+    /*private void deleteFromCatMovie(int movieId) {
+        try(Connection con = dataAccess.getConnection()){
+            String sql = "DELETE FROM CatMovie WHERE movie_id = ?";
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setInt(1,movieId);
+            statement.executeUpdate();
+        }catch (SQLException ex){
+            ex.printStackTrace();
+        }
+    }*/
 
     public void changeMovieRating(Movie movie){
         System.out.println(movie.getTitle() + " rating is set " + movie.getRating());
