@@ -152,7 +152,7 @@ public class MainController implements Initializable {
 
     public void playMovie(KeyEvent keyEvent) throws IOException {
         String pathTo = listMovie.getSelectionModel().getSelectedItem().getPath();
-        if (pathTo != null && keyEvent.getCharacter() == "p"){
+        if (pathTo != null || keyEvent.getCharacter() == "p"){
             File video = new File(pathTo);
             Desktop desktop = Desktop.getDesktop();
             desktop.open(video);
