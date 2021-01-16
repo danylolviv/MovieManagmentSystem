@@ -40,6 +40,16 @@ public class MovieModel {
         movieManager.changeMovieRating(movie);
     }
 
+    public ObservableList<Movie> sortMovies(ObservableList<Movie> listMovies,String sortParameter){
+        if(sortParameter.equals("title")) {
+            return movieManager.sortMovies(movies, movieManager.SORT_NAME);
+        }
+        else if(sortParameter.equals("rating")) {
+            return movieManager.sortMovies(movies, movieManager.SORT_RATING);
+        }
+        return null;
+    }
+
     public ObservableList<Movie> searchedMovies(String searchQuery){
         return movieManager.searchMovies(movies,searchQuery);
     }

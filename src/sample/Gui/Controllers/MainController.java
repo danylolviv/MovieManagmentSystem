@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
+    private ObservableList<String> sortTypes = FXCollections.observableArrayList("title","rating");
 
     public Label ratingSearchRangeLbl;
     public Label titleView;
@@ -47,6 +48,10 @@ public class MainController implements Initializable {
     MovieModel movModel;
     CategoryModel categoryModel;
     @FXML
+    private Button sortButton;
+    @FXML
+    private ChoiceBox<String> sortChoiceBox;
+    @FXML
     private ListView<Category> listCategory;
     @FXML
     private ListView<Movie> listMovie;
@@ -60,6 +65,8 @@ public class MainController implements Initializable {
         getAllCategories();
         listMovie.setItems(movModel.getMovies());
         listCategory.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        sortChoiceBox.setItems(sortTypes);
 
         typeField.textProperty().addListener((observableValue, s, t1) -> {
             searchMovies();
@@ -198,5 +205,9 @@ public class MainController implements Initializable {
         }
         else if(!searchedCategories.isEmpty()) listMovie.setItems(movModel.searchedMovies(query,searchedCategories));
         else listMovie.setItems(movModel.searchedMovies(query));
+    }
+
+    public void sortMovies() {
+        listMovie.setItems(movModel.sortMovies(listMovie.getItems(),sortChoiceBox.getSelectionModel().getSelectedItem().toLowerCase()));
     }
 }

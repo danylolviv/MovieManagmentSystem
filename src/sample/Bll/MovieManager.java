@@ -7,9 +7,14 @@ import sample.Be.Movie;
 import sample.Dal.DAOMovie;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MovieManager {
+    public final int SORT_NAME = 100;
+    public final int SORT_RATING = 101;
+
     private final DAOMovie daoMovie;
 
     public MovieManager(){
@@ -85,6 +90,39 @@ public class MovieManager {
             }
         }
         return foundMovies;
+    }
+
+    public ObservableList<Movie> sortMovies(ObservableList<Movie> movies,int sortParameter){
+        ArrayList<String> titles = new ArrayList<String>();
+        ArrayList<Double> ratings = new ArrayList<Double>();
+
+        if(sortParameter == SORT_NAME) {
+            for (Movie movie : movies) {
+                titles.add(movie.getTitle().toLowerCase());
+            }
+            titles = titles.stream().sorted().collect(Collectors.toCollection(ArrayList::new));
+            for (String title : titles) {
+                for (Movie movie : movies) {
+                    if (movie.getTitle().toLowerCase().equals(title)) {
+                        Collections.swap(movies, movies.indexOf(movie), titles.indexOf(title));
+                    }
+                }
+            }
+        }
+        if(sortParameter == SORT_RATING) {
+            for (Movie movie : movies) {
+                ratings.add(movie.getRating());
+            }
+            ratings = ratings.stream().sorted().collect(Collectors.toCollection(ArrayList::new));
+            for (Double rating : ratings) {
+                for (Movie movie : movies) {
+                    if (movie.getRating() == rating) {
+                        Collections.swap(movies, movies.indexOf(movie), ratings.indexOf(rating));
+                    }
+                }
+            }
+        }
+        return movies;
     }
 }
 
