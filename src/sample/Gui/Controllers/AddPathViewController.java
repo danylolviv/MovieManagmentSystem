@@ -4,7 +4,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -20,6 +23,7 @@ import sample.Gui.Models.CategoryMovieModel;
 import sample.Gui.Models.MovieModel;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -52,15 +56,23 @@ public class AddPathViewController implements Initializable {
     private List<Category> categories;
     private ObservableList cat = FXCollections.observableArrayList();
     private Double ratingStars;
+    private CategoryModel theCategoryModel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        System.out.println("initialize");
     }
 
-    public void setCategories(List<Category> cat) {
+   /* public void setCategories(List<Category> cat) {
+        System.out.println("called");
         this.categories = cat;
         categoriesList.getItems().addAll(categories);
+    }*/
+
+    public void setCategories(CategoryModel categoryModel) {
+        System.out.println("called");
+        categoriesList.getItems().addAll(categoryModel.getAllCategories());
+        this.theCategoryModel = categoryModel;
     }
 
     public void addMovie(){
@@ -131,5 +143,15 @@ public class AddPathViewController implements Initializable {
         double rating = ratingMovie.getRating() * 2;
         double roudedRating = Math.round(rating * 10.0)/10.0;
         ratingStars = roudedRating;
+    }
+
+    public void addNewCategoryWindow(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/Gui/Views/AddCategoryView.fxml"));
+        Parent root = loader.load();
+        ((AddCategoryController)loader.getController()).setCategories(theCategoryModel);
+        Stage pastaStage = new Stage();
+        pastaStage.setTitle("Add Category");
+        pastaStage.setScene(new Scene(root));
+        pastaStage.show();
     }
 }
