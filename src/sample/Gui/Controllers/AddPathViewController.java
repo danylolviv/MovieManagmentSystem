@@ -34,8 +34,8 @@ import java.util.ResourceBundle;
 
 public class AddPathViewController implements Initializable {
 
-
-
+    @FXML
+    private Label movieLblExists;
     CategoryModel categoryModel;
     private File randomFile;
     public Rating ratingMovie;
@@ -62,6 +62,7 @@ public class AddPathViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("initialize");
+        movieLblExists.setVisible(false);
     }
 
    /* public void setCategories(List<Category> cat) {
@@ -70,15 +71,27 @@ public class AddPathViewController implements Initializable {
         categoriesList.getItems().addAll(categories);
     }*/
 
-    public void setCategories(CategoryModel categoryModel) {
+    public void setCategories(CategoryModel categoryModel, MovieModel movieModel) {
         System.out.println("called");
         categoriesList.getItems().addAll(categoryModel.getAllCategories());
         addedCategories.setItems(categoryModel.getAddMovieCategories());
         this.theCategoryModel = categoryModel;
+        this.mModel = movieModel;
     }
 
     public void addMovie(){
         String title = movieTitleField.getText();
+
+        for(Movie m: mModel.getMovies()){
+            if(m.getTitle().toLowerCase().equals(title.toLowerCase())){
+                movieLblExists.setVisible(true);
+            }else {
+
+
+
+            }
+        }
+
         String moviePath = pathToMovie.getText();
         double raiting = ratingStars;
         LocalDate date = java.time.LocalDate.now();

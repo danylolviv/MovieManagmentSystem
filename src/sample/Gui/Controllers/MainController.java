@@ -112,7 +112,7 @@ public class MainController implements Initializable {
     public void addPath(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/Gui/Views/AddPathView.fxml"));
         Parent root = loader.load();
-        ((AddPathViewController)loader.getController()).setCategories(categoryModel);
+        ((AddPathViewController)loader.getController()).setCategories(categoryModel, movModel);
         Stage pastaStage = new Stage();
         pastaStage.setTitle("Movie Settings");
         pastaStage.setScene(new Scene(root));
