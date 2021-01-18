@@ -160,7 +160,7 @@ public class MainController implements Initializable {
 
     public void removeCategory(ActionEvent actionEvent) {
         if(listCategory.getSelectionModel().getSelectedItems() != null){
-            removeMovie(listCategory.getEditingIndex());
+            removeMovie(listCategory.getSelectionModel().getSelectedItem().getID());
             listCategory.getItems().remove(listCategory.getSelectionModel().getSelectedItem());
         }
     }

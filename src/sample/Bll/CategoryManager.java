@@ -22,7 +22,7 @@ public class CategoryManager {
         System.out.println("recieved cat" +  recievedCategory.toString());
     }
 
-    public void deleteCategory(int movieID){
-        daoCategory.deleteCategory(movieID);
+    public void deleteCategory(int categoryId){
+        daoCategory.deleteCategory(categoryId);
     }
 }
