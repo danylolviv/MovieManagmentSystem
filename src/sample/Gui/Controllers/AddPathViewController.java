@@ -34,7 +34,8 @@ import java.util.ResourceBundle;
 
 public class AddPathViewController implements Initializable {
 
-
+    @FXML
+    private Label movieLblExists;
     private File randomFile;
     public Rating ratingMovie;
 
@@ -62,6 +63,7 @@ public class AddPathViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("initialize");
+        movieLblExists.setVisible(false);
     }
 
    /* public void setCategories(List<Category> cat) {
@@ -87,6 +89,17 @@ public class AddPathViewController implements Initializable {
 
     public void addMovie(){
         String title = movieTitleField.getText();
+
+        for(Movie m: mModel.getMovies()){
+            if(m.getTitle().toLowerCase().equals(title.toLowerCase())){
+                movieLblExists.setVisible(true);
+            }else {
+
+
+
+            }
+        }
+
         String moviePath = pathToMovie.getText();
         double raiting = ratingStars;
         LocalDate date = java.time.LocalDate.now();
@@ -161,10 +174,11 @@ public class AddPathViewController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/Gui/Views/AddCategoryView.fxml"));
         Parent root = loader.load();
         ((AddCategoryController)loader.getController()).setCategories(catModel);
-        Stage pastaStage = new Stage();
-        pastaStage.setTitle("Add Category");
-        pastaStage.setScene(new Scene(root));
-        pastaStage.show();
+        Stage newCategoryStage = new Stage();
+        newCategoryStage.setTitle("Add Category");
+        newCategoryStage.setScene(new Scene(root));
+        newCategoryStage.setResizable(false);
+        newCategoryStage.show();
     }
 
 

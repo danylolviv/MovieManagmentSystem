@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import org.controlsfx.control.Rating;
 import sample.Be.Category;
 import sample.Be.Movie;
+import sample.Exceptions.DeleteMovieException;
 import sample.Gui.Models.CategoryModel;
 import sample.Gui.Models.CategoryMovieModel;
 import sample.Gui.Models.MovieModel;
@@ -77,6 +78,11 @@ public class MainController implements Initializable {
         typeField.textProperty().addListener((observableValue, s, t1) -> {
             searchMovies();
         });
+        try {
+            openWarning();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void getAllCategories(){
@@ -87,7 +93,7 @@ public class MainController implements Initializable {
         listMovie.setItems(movModel.getMovies());
     }
 
-    public void removeMovie(int movieId){
+    public void removeMovie(int movieId) throws DeleteMovieException {
         movModel.deleteMovie(movieId);
     }
 
@@ -97,21 +103,32 @@ public class MainController implements Initializable {
     @FXML
     private void openWindow(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/sample/Gui/Views/Library.fxml"));
-        Stage stage = new Stage();
-        stage.setTitle("Library");
-        stage.setScene(new Scene(root));
-        stage.setResizable(false);
-        stage.show();
+        Stage LibraryStage = new Stage();
+        LibraryStage.setTitle("Library");
+        LibraryStage.setScene(new Scene(root));
+        LibraryStage.setResizable(false);
+        LibraryStage.show();
     }
 
 
     public void openCategories(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/sample/Gui/Views/CategoriesView.fxml"));
         //((AddPathViewController)loader.getController()).setModel(categoryModel);
+        Stage CategoriesStage = new Stage();
+        CategoriesStage.setTitle("Categories");
+        CategoriesStage.setScene(new Scene(root));
+        CategoriesStage.setResizable(false);
+        CategoriesStage.show();
+    }
+
+    private void openWarning() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/sample/Gui/Views/Warning.fxml"));
         Stage stage = new Stage();
-        stage.setTitle("Categories");
+        stage.setTitle("Warning");
         stage.setScene(new Scene(root));
+        stage.setResizable(false);
         stage.show();
+        stage.setAlwaysOnTop(true);
     }
 
     public void addPath(ActionEvent actionEvent) throws IOException {
@@ -120,10 +137,11 @@ public class MainController implements Initializable {
         ((AddPathViewController)loader.getController()).setCategories(categoryModel);
         ((AddPathViewController)loader.getController()).setmModel(movModel);
         ((AddPathViewController)loader.getController()).setCatMovModel(catMovieModel);
-        Stage pastaStage = new Stage();
-        pastaStage.setTitle("Movie Settings");
-        pastaStage.setScene(new Scene(root));
-        pastaStage.show();
+        Stage MovieSettingsStage = new Stage();
+        MovieSettingsStage.setTitle("Movie Settings");
+        MovieSettingsStage.setScene(new Scene(root));
+        MovieSettingsStage.setResizable(false);
+        MovieSettingsStage.show();
     }
 
 
@@ -158,14 +176,14 @@ public class MainController implements Initializable {
         }
     }
 
-    public void removeMovie(ActionEvent actionEvent) {
+    public void removeMovie(ActionEvent actionEvent) throws DeleteMovieException {
         if(listMovie.getSelectionModel().getSelectedItems() != null){
             removeMovie(listMovie.getSelectionModel().getSelectedItem().getId());
             listMovie.getItems().remove(listMovie.getSelectionModel().getSelectedItem());
         }
     }
 
-    public void removeCategory(ActionEvent actionEvent) {
+    public void removeCategory(ActionEvent actionEvent) throws DeleteMovieException {
         if(listCategory.getSelectionModel().getSelectedItems() != null){
             removeMovie(listCategory.getSelectionModel().getSelectedItem().getID());
             listCategory.getItems().remove(listCategory.getSelectionModel().getSelectedItem());

@@ -12,7 +12,7 @@
 <AnchorPane id="pane" fx:id="anchorid" prefHeight="400.0" prefWidth="454.0" stylesheets="@../Css/ListView.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Gui.Controllers.AddPathViewController">
    <children>
       <Button layoutX="366.0" layoutY="320.0" mnemonicParsing="false" onAction="#findFile" text="..." />
-      <TextField fx:id="pathToMovie" layoutX="151.0" layoutY="320.0"  prefHeight="25.0" prefWidth="210.0" promptText="Path to your movie" />
+      <TextField fx:id="pathToMovie" layoutX="151.0" layoutY="320.0" prefHeight="25.0" prefWidth="210.0" promptText="Path to your movie" />
       <Label layoutX="23.0" layoutY="20.0" prefHeight="28.0" prefWidth="103.0" text="Add Movie" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
@@ -58,5 +58,10 @@
                </effect>-->
             </Rating>
       <Button layoutX="367.0" layoutY="109.0" mnemonicParsing="false" onAction="#addNewCategoryWindow" text="Add new" />
+      <Label fx:id="movieLblExists" layoutX="151.0" layoutY="14.0" prefHeight="27.0" prefWidth="176.0" text="Movie Label Exists" textFill="#09e0d7">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

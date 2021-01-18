@@ -6,6 +6,8 @@ import sample.Be.CatMovie;
 import sample.Be.Category;
 import sample.Be.Movie;
 import sample.Bll.MovieManager;
+import sample.Exceptions.AddMovieException;
+import sample.Exceptions.DeleteMovieException;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -28,14 +30,14 @@ public class MovieModel {
         movies.setAll(movieManager.getAllMovies());
     }
 
-    public void addMovie(Movie movie){
+    public void addMovie(Movie movie) throws AddMovieException {
         movieManager.addMovie(movie);
         System.out.println("before updating ");
         updateMovieList();
         System.out.println("after updating ");
     }
 
-    public void deleteMovie(int movieId){
+    public void deleteMovie(int movieId) throws DeleteMovieException {
         movieManager.deleteMovie(movieId);
     }
 
