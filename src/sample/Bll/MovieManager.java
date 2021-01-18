@@ -5,11 +5,14 @@ import javafx.collections.ObservableList;
 import sample.Be.Category;
 import sample.Be.Movie;
 import sample.Dal.DAOMovie;
+import sample.Exceptions.AddMovieException;
+import sample.Exceptions.DeleteMovieException;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.zip.DataFormatException;
 
 public class MovieManager {
     public final int SORT_NAME = 100;
@@ -25,11 +28,11 @@ public class MovieManager {
         return daoMovie.getAllMovies();
     }
 
-    public void addMovie(Movie movie){
+    public void addMovie(Movie movie)throws AddMovieException {
         daoMovie.addMovie(movie);
     }
 
-    public void deleteMovie(int movieID){
+    public void deleteMovie(int movieID)throws DeleteMovieException {
         daoMovie.deleteMovie(movieID);
     }
 
