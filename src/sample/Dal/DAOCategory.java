@@ -45,7 +45,7 @@ public class DAOCategory {
             statement1.executeUpdate();
 
 
-            String sql = "DELETE FROM Movie_Data WHERE category_id = ?";
+            String sql = "DELETE FROM Category WHERE category_id = ?";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setInt(1,categoryId);
             statement.executeUpdate();
