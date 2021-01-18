@@ -116,7 +116,7 @@ public class MovieManager {
             ratings = ratings.stream().sorted().collect(Collectors.toCollection(ArrayList::new));
             for (Double rating : ratings) {
                 for (Movie movie : movies) {
-                    if (movie.getRating() == rating) {
+                    if (movie.getRating().equals(rating)) {
                         Collections.swap(movies, movies.indexOf(movie), ratings.indexOf(rating));
                     }
                 }
