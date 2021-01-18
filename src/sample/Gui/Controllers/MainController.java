@@ -19,6 +19,7 @@ import org.controlsfx.control.Rating;
 import sample.Be.Category;
 import sample.Be.Movie;
 import sample.Gui.Models.CategoryModel;
+import sample.Gui.Models.CategoryMovieModel;
 import sample.Gui.Models.MovieModel;
 
 import java.awt.*;
@@ -47,6 +48,8 @@ public class MainController implements Initializable {
 
     MovieModel movModel;
     CategoryModel categoryModel;
+    CategoryMovieModel catMovieModel;
+
     @FXML
     private Button sortButton;
     @FXML
@@ -62,6 +65,9 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         movModel = new MovieModel();
+        categoryModel = new CategoryModel();
+        catMovieModel = new CategoryMovieModel();
+
         getAllCategories();
         listMovie.setItems(movModel.getMovies());
         listCategory.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -74,7 +80,6 @@ public class MainController implements Initializable {
     }
 
     public void getAllCategories(){
-        categoryModel = new CategoryModel();
         listCategory.setItems(categoryModel.getAllCategories());
     }
 
@@ -113,6 +118,8 @@ public class MainController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/Gui/Views/AddPathView.fxml"));
         Parent root = loader.load();
         ((AddPathViewController)loader.getController()).setCategories(categoryModel);
+        ((AddPathViewController)loader.getController()).setmModel(movModel);
+        ((AddPathViewController)loader.getController()).setCatMovModel(catMovieModel);
         Stage pastaStage = new Stage();
         pastaStage.setTitle("Movie Settings");
         pastaStage.setScene(new Scene(root));
@@ -199,26 +206,27 @@ public class MainController implements Initializable {
              ) {
             System.out.println(c.getName());
         }
+        searchMovies();
     }
 
     private void searchMovies(){
         String query = typeField.getText();
         if(ratingSearch){
             if(ratingSearchA<=ratingSearchB){
-                if(!searchedCategories.isEmpty()) listMovie.setItems(movModel.searchedMovies(query,searchedCategories,ratingSearchA,ratingSearchB));
+                if(!searchedCategories.isEmpty()) listMovie.setItems(movModel.searchedMovies(query,searchedCategories,catMovieModel.getCatMovies(),ratingSearchA,ratingSearchB));
                 else listMovie.setItems(movModel.searchedMovies(query,ratingSearchA,ratingSearchB));
             }
             if(ratingSearchB<ratingSearchA){
-                if(!searchedCategories.isEmpty()) listMovie.setItems(movModel.searchedMovies(query,searchedCategories,ratingSearchB,ratingSearchA));
+                if(!searchedCategories.isEmpty()) listMovie.setItems(movModel.searchedMovies(query,searchedCategories,catMovieModel.getCatMovies(),ratingSearchB,ratingSearchA));
                 else listMovie.setItems(movModel.searchedMovies(query,ratingSearchB,ratingSearchA));
             }
         }
-        else if(!searchedCategories.isEmpty()) listMovie.setItems(movModel.searchedMovies(query,searchedCategories));
+        else if(!searchedCategories.isEmpty()) listMovie.setItems(movModel.searchedMovies(query,searchedCategories,catMovieModel.getCatMovies()));
         else listMovie.setItems(movModel.searchedMovies(query));
     }
 
     public void sortMovies() {
-        listMovie.setItems(movModel.sortMovies(listMovie.getItems(),sortChoiceBox.getSelectionModel().getSelectedItem().toLowerCase()));
+        if(sortChoiceBox.getSelectionModel().getSelectedItem()!=null)listMovie.setItems(movModel.sortMovies(listMovie.getItems(),sortChoiceBox.getSelectionModel().getSelectedItem().toLowerCase()));
     }
 
     public void refresh(ActionEvent actionEvent) {

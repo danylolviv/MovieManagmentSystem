@@ -1,27 +1,26 @@
 package sample.Be;
 
 public class CatMovie {
-    private int id;
-    private String movieTile;
+    private int catId;
+    private int movId;
 
-    public CatMovie(int id, String mTtle){
-        this.id = id;
-        this.movieTile = mTtle;
+    public CatMovie(int catId, int movId){
+        this.catId = catId;
+        this.movId = movId;
     }
 
-    public int getId() {
-        return id;
+    public int getCatId() {
+        return catId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCatId(int id) { catId = id;
     }
 
-    public String getMovieTile() {
-        return movieTile;
+    public int getMovId() {
+        return movId;
     }
 
-    public void setMovieTile(String movieTile) {
-        this.movieTile = movieTile;
+    public void setMovId(int id) {
+        movId = id;
     }
 }

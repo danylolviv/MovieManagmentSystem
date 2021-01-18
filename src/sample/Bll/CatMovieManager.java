@@ -8,9 +8,15 @@ import java.util.List;
 public class CatMovieManager {
     DAOCategory_Movie catMovieDAO;
 
-    public void addCategoryMovie(List<CatMovie> list){
+    public CatMovieManager(){
         catMovieDAO = new DAOCategory_Movie();
+    }
+
+    public void addCategoryMovie(List<CatMovie> list){
         catMovieDAO.addCategoryMovie(list);
     }
 
+    public List<CatMovie> getAllCatMovies(){
+        return catMovieDAO.getAllCatMovies();
+    }
 }

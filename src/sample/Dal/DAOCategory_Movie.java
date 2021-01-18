@@ -1,22 +1,42 @@
 package sample.Dal;
 
 import sample.Be.CatMovie;
+import sample.Be.Category;
 import sample.Be.Movie;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DAOCategory_Movie {
 
-    private static DataAccess dataAccess;
+    private static DataAccess dataAccess = new DataAccess();
 
+    public List<CatMovie> getAllCatMovies() {
+
+        ArrayList<CatMovie> catMovies = new ArrayList<>();
+        try (Connection con = dataAccess.getConnection()) {
+
+            String sql = "SELECT * FROM CatMovie;";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+
+            while (rs.next()) {
+                int idCat = rs.getInt("category_id");
+                int idMov = rs.getInt("movie_id");
+                CatMovie catMovie = new CatMovie(idCat, idMov);
+                catMovies.add(catMovie);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return catMovies;
+    }
 
     public void addCategoryMovie(List<CatMovie> list) {
 
-        int id = getLatestId();
-
         for (CatMovie ct: list){
-           System.out.println("Category id: " + ct.getId() + "  " + "Movie id: " + id);
+           System.out.println("Category id: " + ct.getCatId() + "  " + "Movie id: " + ct.getMovId());
         }
         try (Connection con = dataAccess.getConnection()) {
 
@@ -24,8 +44,8 @@ public class DAOCategory_Movie {
             PreparedStatement statement = con.prepareStatement(sql);
 
             for (CatMovie cM : list) {
-                statement.setInt(1, cM.getId());
-                statement.setInt(2, id);
+                statement.setInt(1, cM.getCatId());
+                statement.setInt(2, cM.getMovId());
                 statement.executeUpdate();
             }
         } catch (SQLException ex) {
@@ -35,8 +55,6 @@ public class DAOCategory_Movie {
     }
 
     public int getLatestId() {
-
-        dataAccess = new DataAccess();
 
         int lastMovieId = 0;
 

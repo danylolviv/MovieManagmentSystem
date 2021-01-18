@@ -35,8 +35,6 @@ import java.util.ResourceBundle;
 public class AddPathViewController implements Initializable {
 
 
-
-    CategoryModel categoryModel;
     private File randomFile;
     public Rating ratingMovie;
 
@@ -54,10 +52,12 @@ public class AddPathViewController implements Initializable {
     private Button close;
 
     private MovieModel mModel;
+    private CategoryModel catModel;
+    private CategoryMovieModel catMovModel;
+
     private List<Category> categories;
     private ObservableList cat = FXCollections.observableArrayList();
     private Double ratingStars;
-    private CategoryModel theCategoryModel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -72,9 +72,17 @@ public class AddPathViewController implements Initializable {
 
     public void setCategories(CategoryModel categoryModel) {
         System.out.println("called");
+        this.catModel = categoryModel;
         categoriesList.getItems().addAll(categoryModel.getAllCategories());
         addedCategories.setItems(categoryModel.getAddMovieCategories());
-        this.theCategoryModel = categoryModel;
+    }
+
+    public void setCatMovModel(CategoryMovieModel catMovModel) {
+        this.catMovModel = catMovModel;
+    }
+
+    public void setmModel(MovieModel mModel){
+        this.mModel = mModel;
     }
 
     public void addMovie(){
@@ -83,20 +91,23 @@ public class AddPathViewController implements Initializable {
         double raiting = ratingStars;
         LocalDate date = java.time.LocalDate.now();
         Movie newMovie = new Movie(1,title,raiting,moviePath,date);
-        mModel = new MovieModel();
         mModel.addMovie(newMovie);
-        List<Category> listCat = addedCategories.getItems();
-        addMovieCat(title, listCat);
         mModel.updateMovieList();
+        ObservableList listCat = addedCategories.getItems();
+        for (Movie m:mModel.getMovies()) {
+            if (m.getTitle().equals(title)){
+                addMovieCat(m.getId(), listCat);
+            }
+        }
+        catMovModel.updateCatMovieList();
         closeWindow();
     }
 
-    public void addMovieCat(String title,List<Category> listCat ) {
+    public void addMovieCat(int id,List<Category> listCat ) {
         List<CatMovie> listOfCategoriesAndMovies = new ArrayList<>();
         for(Category c: listCat){
-            listOfCategoriesAndMovies.add(new CatMovie(c.getID(), title));
+            listOfCategoriesAndMovies.add(new CatMovie(c.getID(), id));
         }
-        CategoryMovieModel catMovModel = new CategoryMovieModel();
         catMovModel.addMovieCat(listOfCategoriesAndMovies);
     }
 
@@ -135,7 +146,6 @@ public class AddPathViewController implements Initializable {
         addedCategories.getItems().remove(addedCategories.getSelectionModel().getSelectedItem());
     }
 
-
     public void closeWindow() {
         Stage stage = (Stage) close.getScene().getWindow();
         stage.close();
@@ -150,7 +160,7 @@ public class AddPathViewController implements Initializable {
     public void addNewCategoryWindow(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/Gui/Views/AddCategoryView.fxml"));
         Parent root = loader.load();
-        ((AddCategoryController)loader.getController()).setCategories(theCategoryModel);
+        ((AddCategoryController)loader.getController()).setCategories(catModel);
         Stage pastaStage = new Stage();
         pastaStage.setTitle("Add Category");
         pastaStage.setScene(new Scene(root));
