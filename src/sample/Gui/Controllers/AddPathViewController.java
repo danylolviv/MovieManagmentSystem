@@ -19,6 +19,7 @@ import org.controlsfx.control.Rating;
 import sample.Be.CatMovie;
 import sample.Be.Category;
 import sample.Be.Movie;
+import sample.Exceptions.AddMovieException;
 import sample.Gui.Models.CategoryModel;
 import sample.Gui.Models.CategoryMovieModel;
 import sample.Gui.Models.MovieModel;
@@ -87,7 +88,7 @@ public class AddPathViewController implements Initializable {
         this.mModel = mModel;
     }
 
-    public void addMovie(){
+    public void addMovie() throws AddMovieException {
         String title = movieTitleField.getText();
 
         for(Movie m: mModel.getMovies()){
@@ -145,7 +146,7 @@ public class AddPathViewController implements Initializable {
 
     }
 
-    public void openIt(ActionEvent actionEvent)  {
+    public void openIt(ActionEvent actionEvent) throws AddMovieException {
         addMovie();
 
     }
