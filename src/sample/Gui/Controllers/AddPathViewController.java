@@ -79,7 +79,7 @@ public class AddPathViewController implements Initializable {
         this.mModel = mModel;
     }
 
-    public void addMovie() throws AddMovieException {
+    public void addMovie(){
         String title = movieTitleField.getText();
 
         for (Movie m : mModel.getMovies()) {
@@ -95,7 +95,13 @@ public class AddPathViewController implements Initializable {
         double raiting = ratingStars;
         LocalDate date = java.time.LocalDate.now();
         Movie newMovie = new Movie(1, title, raiting, moviePath, date);
-        mModel.addMovie(newMovie);
+        try {
+            mModel.addMovie(newMovie);
+        } catch (AddMovieException e) {
+            Alert alertAddMovieException = new Alert(Alert.AlertType.CONFIRMATION, e.message, ButtonType.OK);
+            alertAddMovieException.showAndWait();
+            e.printStackTrace();
+        }
         mModel.updateMovieList();
         ObservableList listCat = addedCategories.getItems();
         for (Movie m : mModel.getMovies()) {
@@ -136,9 +142,9 @@ public class AddPathViewController implements Initializable {
 
     }
 
-    public void openIt(ActionEvent actionEvent) throws AddMovieException {
-        addMovie();
+    public void openIt(ActionEvent actionEvent){
 
+        addMovie();
     }
 
     public void addCategory(ActionEvent actionEvent) {
