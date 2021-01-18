@@ -21,4 +21,8 @@ public class CategoryManager {
         Category recievedCategory = daoCategory.addNewCategory(catName);
         System.out.println("recieved cat" +  recievedCategory.toString());
     }
+
+    public void deleteCategory(int movieID){
+        daoCategory.deleteCategory(movieID);
+    }
 }

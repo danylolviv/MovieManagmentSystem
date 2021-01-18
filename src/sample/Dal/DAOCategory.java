@@ -34,6 +34,27 @@ public class DAOCategory {
         return categories;
     }
 
+    public void deleteCategory(int categoryId){
+        System.out.println(categoryId);
+        try(Connection con = dataAccess.getConnection()){
+
+
+            String sql1 = "DELETE FROM CatMovie WHERE category_id = ?";
+            PreparedStatement statement1 = con.prepareStatement(sql1);
+            statement1.setInt(1,categoryId);
+            statement1.executeUpdate();
+
+
+            String sql = "DELETE FROM Movie_Data WHERE category_id = ?";
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setInt(1,categoryId);
+            statement.executeUpdate();
+
+        }catch (SQLException ex){
+            ex.printStackTrace();
+        }
+    }
+
     public Category addNewCategory(String catName) {
         try (Connection con = dataAccess.getConnection()) {
             String sql = "INSERT INTO Category (category_name) VALUES (?) ";

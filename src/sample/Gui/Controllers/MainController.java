@@ -86,6 +86,9 @@ public class MainController implements Initializable {
         movModel.deleteMovie(movieId);
     }
 
+    public void removeCategory(int categoryId){
+        categoryModel.deleteCategory(categoryId);
+    }
     @FXML
     private void openWindow(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/sample/Gui/Views/Library.fxml"));
@@ -152,6 +155,13 @@ public class MainController implements Initializable {
         if(listMovie.getSelectionModel().getSelectedItems() != null){
             removeMovie(listMovie.getSelectionModel().getSelectedItem().getId());
             listMovie.getItems().remove(listMovie.getSelectionModel().getSelectedItem());
+        }
+    }
+
+    public void removeCategory(ActionEvent actionEvent) {
+        if(listCategory.getSelectionModel().getSelectedItems() != null){
+            removeMovie(listCategory.getEditingIndex());
+            listCategory.getItems().remove(listCategory.getSelectionModel().getSelectedItem());
         }
     }
 

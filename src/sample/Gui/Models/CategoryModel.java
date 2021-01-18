@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import sample.Be.Category;
 import sample.Bll.CategoryManager;
 import sample.Dal.DAOCategory;
+import sample.Bll.CategoryManager;
 
 import java.util.List;
 
@@ -25,6 +26,10 @@ public class CategoryModel {
     }
 
 
+
+    public void deleteCategory(int categoryId){
+        catManager.deleteCategory(categoryId);
+    }
     public void addNewCategory(String catName) {
         catManager.addNewCategory(catName);
     }
