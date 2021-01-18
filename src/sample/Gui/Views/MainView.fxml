@@ -119,6 +119,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
+            <Button layoutX="447.0" layoutY="5.0" mnemonicParsing="false" onAction="#refresh" text="Refresh" textFill="#4ff51c" />
          </children>
          <effect>
             <InnerShadow color="#740046" />
