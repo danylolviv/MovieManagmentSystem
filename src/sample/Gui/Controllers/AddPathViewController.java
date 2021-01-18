@@ -164,10 +164,11 @@ public class AddPathViewController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/Gui/Views/AddCategoryView.fxml"));
         Parent root = loader.load();
         ((AddCategoryController)loader.getController()).setCategories(theCategoryModel);
-        Stage pastaStage = new Stage();
-        pastaStage.setTitle("Add Category");
-        pastaStage.setScene(new Scene(root));
-        pastaStage.show();
+        Stage newCategoryStage = new Stage();
+        newCategoryStage.setTitle("Add Category");
+        newCategoryStage.setScene(new Scene(root));
+        newCategoryStage.setResizable(false);
+        newCategoryStage.show();
     }
 
 

@@ -5,17 +5,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import sample.Dal.DAOCategory;
 
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage MainViewStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("Gui/Views/MainView.fxml"));
-        primaryStage.setTitle("MMS");
-        primaryStage.setScene(new Scene(root));
-        primaryStage.setResizable(false);
-        primaryStage.show();
+        MainViewStage.setTitle("MMS");
+        MainViewStage.setScene(new Scene(root));
+        MainViewStage.setResizable(false);
+        MainViewStage.show();
     }
 
 

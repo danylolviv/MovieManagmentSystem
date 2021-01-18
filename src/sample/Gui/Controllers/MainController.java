@@ -92,31 +92,33 @@ public class MainController implements Initializable {
     @FXML
     private void openWindow(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/sample/Gui/Views/Library.fxml"));
-        Stage stage = new Stage();
-        stage.setTitle("Library");
-        stage.setScene(new Scene(root));
-        stage.setResizable(false);
-        stage.show();
+        Stage LibraryStage = new Stage();
+        LibraryStage.setTitle("Library");
+        LibraryStage.setScene(new Scene(root));
+        LibraryStage.setResizable(false);
+        LibraryStage.show();
     }
 
 
     public void openCategories(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/sample/Gui/Views/CategoriesView.fxml"));
         //((AddPathViewController)loader.getController()).setModel(categoryModel);
-        Stage stage = new Stage();
-        stage.setTitle("Categories");
-        stage.setScene(new Scene(root));
-        stage.show();
+        Stage CategoriesStage = new Stage();
+        CategoriesStage.setTitle("Categories");
+        CategoriesStage.setScene(new Scene(root));
+        CategoriesStage.setResizable(false);
+        CategoriesStage.show();
     }
 
     public void addPath(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/Gui/Views/AddPathView.fxml"));
         Parent root = loader.load();
         ((AddPathViewController)loader.getController()).setCategories(categoryModel, movModel);
-        Stage pastaStage = new Stage();
-        pastaStage.setTitle("Movie Settings");
-        pastaStage.setScene(new Scene(root));
-        pastaStage.show();
+        Stage MovieSettingsStage = new Stage();
+        MovieSettingsStage.setTitle("Movie Settings");
+        MovieSettingsStage.setScene(new Scene(root));
+        MovieSettingsStage.setResizable(false);
+        MovieSettingsStage.show();
     }
 
 
