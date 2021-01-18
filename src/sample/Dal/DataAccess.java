@@ -6,10 +6,9 @@ import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.sql.Connection;
 
 public class DataAccess {
-    private SQLServerDataSource dataSource;
+    private final SQLServerDataSource dataSource;
 
-    public DataAccess()
-    {
+    public DataAccess() {
         dataSource = new SQLServerDataSource();
         dataSource.setServerName("10.176.111.31");
         dataSource.setUser("CSe20B_3");
@@ -17,8 +16,7 @@ public class DataAccess {
         dataSource.setDatabaseName("MovieStoringSystem");
     }
 
-    public Connection getConnection() throws SQLServerException
-    {
+    public Connection getConnection() throws SQLServerException {
         return dataSource.getConnection();
     }
 }
