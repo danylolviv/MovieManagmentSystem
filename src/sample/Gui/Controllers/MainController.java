@@ -40,7 +40,7 @@ public class MainController implements Initializable {
     Double ratingSearchA;
     Double ratingSearchB;
     boolean ratingSearch;
-    List<Category> searchedCategories = new ArrayList<Category>();
+    List<Category> searchedCategories = new ArrayList<>();
 
     public Button ratingSearchButton;
     public Slider ratingSearchSlider;
@@ -110,7 +110,6 @@ public class MainController implements Initializable {
         LibraryStage.show();
     }
 
-
     public void openCategories(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/sample/Gui/Views/CategoriesView.fxml"));
         //((AddPathViewController)loader.getController()).setModel(categoryModel);
@@ -143,7 +142,6 @@ public class MainController implements Initializable {
         MovieSettingsStage.setResizable(false);
         MovieSettingsStage.show();
     }
-
 
     public void shiftRatingSearch() {
         switch (ratingSearchButton.getText()) {
@@ -189,8 +187,6 @@ public class MainController implements Initializable {
             listCategory.getItems().remove(listCategory.getSelectionModel().getSelectedItem());
         }
     }
-
-
 
     public void playMovie(KeyEvent keyEvent) throws IOException {
         String pathTo = listMovie.getSelectionModel().getSelectedItem().getPath();
