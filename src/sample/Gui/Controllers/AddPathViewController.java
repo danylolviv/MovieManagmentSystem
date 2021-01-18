@@ -9,9 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TouchEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -29,7 +27,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -58,7 +55,7 @@ public class AddPathViewController implements Initializable {
     private CategoryMovieModel catMovModel;
 
     private List<Category> categories;
-    private ObservableList cat = FXCollections.observableArrayList();
+    private final ObservableList cat = FXCollections.observableArrayList();
     private Double ratingStars;
 
     @Override
@@ -66,12 +63,6 @@ public class AddPathViewController implements Initializable {
         System.out.println("initialize");
         movieLblExists.setVisible(false);
     }
-
-   /* public void setCategories(List<Category> cat) {
-        System.out.println("called");
-        this.categories = cat;
-        categoriesList.getItems().addAll(categories);
-    }*/
 
     public void setCategories(CategoryModel categoryModel) {
         System.out.println("called");
@@ -84,18 +75,17 @@ public class AddPathViewController implements Initializable {
         this.catMovModel = catMovModel;
     }
 
-    public void setmModel(MovieModel mModel){
+    public void setmModel(MovieModel mModel) {
         this.mModel = mModel;
     }
 
     public void addMovie() throws AddMovieException {
         String title = movieTitleField.getText();
 
-        for(Movie m: mModel.getMovies()){
-            if(m.getTitle().toLowerCase().equals(title.toLowerCase())){
+        for (Movie m : mModel.getMovies()) {
+            if (m.getTitle().equalsIgnoreCase(title)) {
                 movieLblExists.setVisible(true);
-            }else {
-
+            } else {
 
 
             }
@@ -104,12 +94,12 @@ public class AddPathViewController implements Initializable {
         String moviePath = pathToMovie.getText();
         double raiting = ratingStars;
         LocalDate date = java.time.LocalDate.now();
-        Movie newMovie = new Movie(1,title,raiting,moviePath,date);
+        Movie newMovie = new Movie(1, title, raiting, moviePath, date);
         mModel.addMovie(newMovie);
         mModel.updateMovieList();
         ObservableList listCat = addedCategories.getItems();
-        for (Movie m:mModel.getMovies()) {
-            if (m.getTitle().equals(title)){
+        for (Movie m : mModel.getMovies()) {
+            if (m.getTitle().equals(title)) {
                 addMovieCat(m.getId(), listCat);
             }
         }
@@ -117,14 +107,13 @@ public class AddPathViewController implements Initializable {
         closeWindow();
     }
 
-    public void addMovieCat(int id,List<Category> listCat ) {
+    public void addMovieCat(int id, List<Category> listCat) {
         List<CatMovie> listOfCategoriesAndMovies = new ArrayList<>();
-        for(Category c: listCat){
+        for (Category c : listCat) {
             listOfCategoriesAndMovies.add(new CatMovie(c.getID(), id));
         }
         catMovModel.addMovieCat(listOfCategoriesAndMovies);
     }
-
 
 
     public void findFile(ActionEvent actionEvent) {
@@ -139,8 +128,7 @@ public class AddPathViewController implements Initializable {
         randomFile = fl;
 
 
-
-        if (fl != null){
+        if (fl != null) {
             pathToMovie.setText(fl.getPath());
         }
 
@@ -167,14 +155,14 @@ public class AddPathViewController implements Initializable {
 
     public void setRating(MouseEvent mouseEvent) {
         double rating = ratingMovie.getRating() * 2;
-        double roudedRating = Math.round(rating * 10.0)/10.0;
+        double roudedRating = Math.round(rating * 10.0) / 10.0;
         ratingStars = roudedRating;
     }
 
     public void addNewCategoryWindow(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/Gui/Views/AddCategoryView.fxml"));
         Parent root = loader.load();
-        ((AddCategoryController)loader.getController()).setCategories(catModel);
+        ((AddCategoryController) loader.getController()).setCategories(catModel);
         Stage newCategoryStage = new Stage();
         newCategoryStage.setTitle("Add Category");
         newCategoryStage.setScene(new Scene(root));

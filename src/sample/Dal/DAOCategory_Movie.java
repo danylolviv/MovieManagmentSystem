@@ -1,8 +1,6 @@
 package sample.Dal;
 
 import sample.Be.CatMovie;
-import sample.Be.Category;
-import sample.Be.Movie;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,7 +8,7 @@ import java.util.List;
 
 public class DAOCategory_Movie {
 
-    private static DataAccess dataAccess = new DataAccess();
+    private static final DataAccess dataAccess = new DataAccess();
 
     public List<CatMovie> getAllCatMovies() {
 
@@ -35,8 +33,8 @@ public class DAOCategory_Movie {
 
     public void addCategoryMovie(List<CatMovie> list) {
 
-        for (CatMovie ct: list){
-           System.out.println("Category id: " + ct.getCatId() + "  " + "Movie id: " + ct.getMovId());
+        for (CatMovie ct : list) {
+            System.out.println("Category id: " + ct.getCatId() + "  " + "Movie id: " + ct.getMovId());
         }
         try (Connection con = dataAccess.getConnection()) {
 

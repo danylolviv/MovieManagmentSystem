@@ -4,7 +4,7 @@ public class CatMovie {
     private int catId;
     private int movId;
 
-    public CatMovie(int catId, int movId){
+    public CatMovie(int catId, int movId) {
         this.catId = catId;
         this.movId = movId;
     }
@@ -13,7 +13,8 @@ public class CatMovie {
         return catId;
     }
 
-    public void setCatId(int id) { catId = id;
+    public void setCatId(int id) {
+        catId = id;
     }
 
     public int getMovId() {

@@ -1,12 +1,12 @@
 package sample.Be;
 
 public class Category {
-    private String name;
-    private  int id;
+    private final String name;
+    private final int id;
 
-    public Category(int id,String name){
-        this.id=id;
-        this.name=name;
+    public Category(int id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public String getName() {
