@@ -1,20 +1,18 @@
 package sample.Be;
 
-import java.sql.Date;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class Movie {
-    private int id;
-    private String title;
+    private final int id;
+    private final String title;
     private Double rating;
     private LocalDate date;
     private String path;
 
     public Movie(int id, String title, Double rating, String path, LocalDate date) {
-        this.id=id;
-        this.title=title;
-        this.rating=rating;
+        this.id = id;
+        this.title = title;
+        this.rating = rating;
         this.date = date;
         this.path = path;
     }
@@ -31,7 +29,7 @@ public class Movie {
         return rating;
     }
 
-    public void setRating(double rating){
+    public void setRating(double rating) {
         this.rating = rating;
     }
 

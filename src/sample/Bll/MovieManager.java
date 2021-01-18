@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.zip.DataFormatException;
 
 public class MovieManager {
     public final int SORT_NAME = 100;
@@ -21,23 +20,23 @@ public class MovieManager {
 
     private final DAOMovie daoMovie;
 
-    public MovieManager(){
+    public MovieManager() {
         daoMovie = new DAOMovie();
     }
 
-    public List<Movie> getAllMovies(){
+    public List<Movie> getAllMovies() {
         return daoMovie.getAllMovies();
     }
 
-    public void addMovie(Movie movie)throws AddMovieException {
+    public void addMovie(Movie movie) throws AddMovieException {
         daoMovie.addMovie(movie);
     }
 
-    public void deleteMovie(int movieID)throws DeleteMovieException {
+    public void deleteMovie(int movieID) throws DeleteMovieException {
         daoMovie.deleteMovie(movieID);
     }
 
-    public void changeMovieRating(Movie movie){
+    public void changeMovieRating(Movie movie) {
         daoMovie.changeMovieRating(movie);
     }
 
@@ -45,10 +44,10 @@ public class MovieManager {
     public ObservableList<Movie> searchMovies(ObservableList<Movie> queriedMovies, String searchQuery) {
         ObservableList<Movie> foundMovies;
         foundMovies = FXCollections.observableArrayList();
-        for(Movie m: queriedMovies){
+        for (Movie m : queriedMovies) {
             String title = m.getTitle().toLowerCase();
             String query = searchQuery.toLowerCase();
-            if (title.contains(query)){
+            if (title.contains(query)) {
                 foundMovies.add(m);
             }
         }
@@ -58,11 +57,11 @@ public class MovieManager {
     public ObservableList<Movie> searchMovies(ObservableList<Movie> queriedMovies, String searchQuery, Double minRating, Double maxRating) {
         ObservableList<Movie> foundMovies;
         foundMovies = FXCollections.observableArrayList();
-        for(Movie m: queriedMovies){
+        for (Movie m : queriedMovies) {
             String title = m.getTitle().toLowerCase();
             Double rating = m.getRating();
             String query = searchQuery.toLowerCase();
-            if (title.contains(query) && rating>=minRating && rating<=maxRating){
+            if (title.contains(query) && rating >= minRating && rating <= maxRating) {
                 foundMovies.add(m);
             }
         }
@@ -73,56 +72,56 @@ public class MovieManager {
         ObservableList<Movie> foundMovies;
         foundMovies = FXCollections.observableArrayList();
         List<Integer> searchedCatIds = new ArrayList<>();
-        for (Category c:searchedCategories) {
+        for (Category c : searchedCategories) {
             searchedCatIds.add(c.getID());
         }
         String query = searchQuery.toLowerCase();
-        for(Movie m: queriedMovies){
+        for (Movie m : queriedMovies) {
             String title = m.getTitle().toLowerCase();
             int id = m.getId();
             List<Integer> movCatIDs = new ArrayList<>();
-            for (CatMovie cm:catMovies) {
-                if(cm.getMovId() == id) {
+            for (CatMovie cm : catMovies) {
+                if (cm.getMovId() == id) {
                     movCatIDs.add(cm.getCatId());
                 }
             }
-            if (title.contains(query) && movCatIDs.containsAll(searchedCatIds)){
+            if (title.contains(query) && movCatIDs.containsAll(searchedCatIds)) {
                 foundMovies.add(m);
             }
         }
         return foundMovies;
     }
 
-    public ObservableList<Movie> searchMovies(ObservableList<Movie> queriedMovies, String searchQuery, List<Category> searchedCategories,List<CatMovie> catMovies, Double minRating, Double maxRating) {
+    public ObservableList<Movie> searchMovies(ObservableList<Movie> queriedMovies, String searchQuery, List<Category> searchedCategories, List<CatMovie> catMovies, Double minRating, Double maxRating) {
         ObservableList<Movie> foundMovies;
         foundMovies = FXCollections.observableArrayList();
         List<Integer> searchedCatIds = new ArrayList<>();
-        for (Category c:searchedCategories) {
+        for (Category c : searchedCategories) {
             searchedCatIds.add(c.getID());
         }
         String query = searchQuery.toLowerCase();
-        for(Movie m: queriedMovies){
+        for (Movie m : queriedMovies) {
             String title = m.getTitle().toLowerCase();
             Double rating = m.getRating();
             int id = m.getId();
             List<Integer> movCatIDs = new ArrayList<>();
-            for (CatMovie cm:catMovies) {
-                if(cm.getMovId() == id) {
+            for (CatMovie cm : catMovies) {
+                if (cm.getMovId() == id) {
                     movCatIDs.add(cm.getCatId());
                 }
             }
-            if (title.contains(query) && rating>=minRating && rating<=maxRating && movCatIDs.containsAll(searchedCatIds)){
+            if (title.contains(query) && rating >= minRating && rating <= maxRating && movCatIDs.containsAll(searchedCatIds)) {
                 foundMovies.add(m);
             }
         }
         return foundMovies;
     }
 
-    public ObservableList<Movie> sortMovies(ObservableList<Movie> movies,int sortParameter){
+    public ObservableList<Movie> sortMovies(ObservableList<Movie> movies, int sortParameter) {
         ArrayList<String> titles = new ArrayList<String>();
         ArrayList<Double> ratings = new ArrayList<Double>();
 
-        if(sortParameter == SORT_NAME) {
+        if (sortParameter == SORT_NAME) {
             for (Movie movie : movies) {
                 titles.add(movie.getTitle().toLowerCase());
             }
@@ -135,7 +134,7 @@ public class MovieManager {
                 }
             }
         }
-        if(sortParameter == SORT_RATING) {
+        if (sortParameter == SORT_RATING) {
             for (Movie movie : movies) {
                 ratings.add(movie.getRating());
             }

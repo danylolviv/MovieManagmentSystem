@@ -8,10 +8,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -32,25 +32,21 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
-    private ObservableList<String> sortTypes = FXCollections.observableArrayList("title","rating");
-
     public Label ratingSearchRangeLbl;
     public Label titleView;
     public Rating ratingMovie;
+    public Button ratingSearchButton;
+    public Slider ratingSearchSlider;
     Double ratingSearchA;
     Double ratingSearchB;
     boolean ratingSearch;
-    List<Category> searchedCategories = new ArrayList<>();
-
-    public Button ratingSearchButton;
-    public Slider ratingSearchSlider;
-    private ObservableList<Category> categories;
-    private ObservableList<Movie> movies;
-
+    List<Category> searchedCategories = new ArrayList<Category>();
     MovieModel movModel;
     CategoryModel categoryModel;
     CategoryMovieModel catMovieModel;
-
+    private final ObservableList<String> sortTypes = FXCollections.observableArrayList("title", "rating");
+    private ObservableList<Category> categories;
+    private ObservableList<Movie> movies;
     @FXML
     private Button sortButton;
     @FXML
@@ -85,11 +81,11 @@ public class MainController implements Initializable {
         }
     }
 
-    public void getAllCategories(){
+    public void getAllCategories() {
         listCategory.setItems(categoryModel.getAllCategories());
     }
 
-    public void getAllMovies(){
+    public void getAllMovies() {
         listMovie.setItems(movModel.getMovies());
     }
 
@@ -97,9 +93,10 @@ public class MainController implements Initializable {
         movModel.deleteMovie(movieId);
     }
 
-    public void removeCategory(int categoryId){
+    public void removeCategory(int categoryId) {
         categoryModel.deleteCategory(categoryId);
     }
+
     @FXML
     private void openWindow(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/sample/Gui/Views/Library.fxml"));
@@ -109,6 +106,7 @@ public class MainController implements Initializable {
         LibraryStage.setResizable(false);
         LibraryStage.show();
     }
+
 
     public void openCategories(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/sample/Gui/Views/CategoriesView.fxml"));
@@ -133,15 +131,16 @@ public class MainController implements Initializable {
     public void addPath(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/Gui/Views/AddPathView.fxml"));
         Parent root = loader.load();
-        ((AddPathViewController)loader.getController()).setCategories(categoryModel);
-        ((AddPathViewController)loader.getController()).setmModel(movModel);
-        ((AddPathViewController)loader.getController()).setCatMovModel(catMovieModel);
+        ((AddPathViewController) loader.getController()).setCategories(categoryModel);
+        ((AddPathViewController) loader.getController()).setmModel(movModel);
+        ((AddPathViewController) loader.getController()).setCatMovModel(catMovieModel);
         Stage MovieSettingsStage = new Stage();
         MovieSettingsStage.setTitle("Movie Settings");
         MovieSettingsStage.setScene(new Scene(root));
         MovieSettingsStage.setResizable(false);
         MovieSettingsStage.show();
     }
+
 
     public void shiftRatingSearch() {
         switch (ratingSearchButton.getText()) {
@@ -158,7 +157,7 @@ public class MainController implements Initializable {
                 ratingSearch = true;
                 ratingSearchButton.setText("reset");
 
-                if(ratingSearchA == ratingSearchB) ratingSearchRangeLbl.setText("rated: " + ratingSearchA);
+                if (ratingSearchA == ratingSearchB) ratingSearchRangeLbl.setText("rated: " + ratingSearchA);
                 else ratingSearchRangeLbl.setText(ratingSearchA + " to " + ratingSearchB);
 
                 ratingSearchRangeLbl.setVisible(true);
@@ -175,22 +174,23 @@ public class MainController implements Initializable {
     }
 
     public void removeMovie(ActionEvent actionEvent) throws DeleteMovieException {
-        if(listMovie.getSelectionModel().getSelectedItems() != null){
+        if (listMovie.getSelectionModel().getSelectedItems() != null) {
             removeMovie(listMovie.getSelectionModel().getSelectedItem().getId());
             listMovie.getItems().remove(listMovie.getSelectionModel().getSelectedItem());
         }
     }
 
     public void removeCategory(ActionEvent actionEvent) throws DeleteMovieException {
-        if(listCategory.getSelectionModel().getSelectedItems() != null){
+        if (listCategory.getSelectionModel().getSelectedItems() != null) {
             removeMovie(listCategory.getSelectionModel().getSelectedItem().getID());
             listCategory.getItems().remove(listCategory.getSelectionModel().getSelectedItem());
         }
     }
 
+
     public void playMovie(KeyEvent keyEvent) throws IOException {
         String pathTo = listMovie.getSelectionModel().getSelectedItem().getPath();
-        if (pathTo != null || keyEvent.getCharacter() == "p"){
+        if (pathTo != null || keyEvent.getCharacter() == "p") {
             File video = new File(pathTo);
             Desktop desktop = Desktop.getDesktop();
             desktop.open(video);
@@ -207,7 +207,7 @@ public class MainController implements Initializable {
 
     public void setRating(MouseEvent mouseEvent) {
         double rating = ratingMovie.getRating() * 2;
-        double roudedRating = Math.round(rating * 10.0)/10.0;
+        double roudedRating = Math.round(rating * 10.0) / 10.0;
         selected.setRating(roudedRating);
         movModel.changeMovieRating(selected);
         getAllMovies();
@@ -216,31 +216,34 @@ public class MainController implements Initializable {
     public void categorySearch() {
         searchedCategories.clear();
         searchedCategories.addAll(listCategory.getSelectionModel().getSelectedItems());
-        for (Category c:searchedCategories
-             ) {
+        for (Category c : searchedCategories
+        ) {
             System.out.println(c.getName());
         }
         searchMovies();
     }
 
-    private void searchMovies(){
+    private void searchMovies() {
         String query = typeField.getText();
-        if(ratingSearch){
-            if(ratingSearchA<=ratingSearchB){
-                if(!searchedCategories.isEmpty()) listMovie.setItems(movModel.searchedMovies(query,searchedCategories,catMovieModel.getCatMovies(),ratingSearchA,ratingSearchB));
-                else listMovie.setItems(movModel.searchedMovies(query,ratingSearchA,ratingSearchB));
+        if (ratingSearch) {
+            if (ratingSearchA <= ratingSearchB) {
+                if (!searchedCategories.isEmpty())
+                    listMovie.setItems(movModel.searchedMovies(query, searchedCategories, catMovieModel.getCatMovies(), ratingSearchA, ratingSearchB));
+                else listMovie.setItems(movModel.searchedMovies(query, ratingSearchA, ratingSearchB));
             }
-            if(ratingSearchB<ratingSearchA){
-                if(!searchedCategories.isEmpty()) listMovie.setItems(movModel.searchedMovies(query,searchedCategories,catMovieModel.getCatMovies(),ratingSearchB,ratingSearchA));
-                else listMovie.setItems(movModel.searchedMovies(query,ratingSearchB,ratingSearchA));
+            if (ratingSearchB < ratingSearchA) {
+                if (!searchedCategories.isEmpty())
+                    listMovie.setItems(movModel.searchedMovies(query, searchedCategories, catMovieModel.getCatMovies(), ratingSearchB, ratingSearchA));
+                else listMovie.setItems(movModel.searchedMovies(query, ratingSearchB, ratingSearchA));
             }
-        }
-        else if(!searchedCategories.isEmpty()) listMovie.setItems(movModel.searchedMovies(query,searchedCategories,catMovieModel.getCatMovies()));
+        } else if (!searchedCategories.isEmpty())
+            listMovie.setItems(movModel.searchedMovies(query, searchedCategories, catMovieModel.getCatMovies()));
         else listMovie.setItems(movModel.searchedMovies(query));
     }
 
     public void sortMovies() {
-        if(sortChoiceBox.getSelectionModel().getSelectedItem()!=null)listMovie.setItems(movModel.sortMovies(listMovie.getItems(),sortChoiceBox.getSelectionModel().getSelectedItem().toLowerCase()));
+        if (sortChoiceBox.getSelectionModel().getSelectedItem() != null)
+            listMovie.setItems(movModel.sortMovies(listMovie.getItems(), sortChoiceBox.getSelectionModel().getSelectedItem().toLowerCase()));
     }
 
     public void refresh(ActionEvent actionEvent) {

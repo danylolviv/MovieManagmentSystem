@@ -1,11 +1,9 @@
 package sample.Gui.Controllers;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -18,15 +16,13 @@ import java.util.ResourceBundle;
 public class CategoriesController implements Initializable {
     public AnchorPane anchorid;
     public TextField pathToMovie;
+    private File randomFile;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
 
-
     }
-
-    private File randomFile;
 
     public void findFile(ActionEvent actionEvent) {
         final FileChooser fileChooser = new FileChooser();
@@ -36,9 +32,8 @@ public class CategoriesController implements Initializable {
         randomFile = fl;
 
 
-
-        if (fl != null){
-            System.out.println("Path : " + fl.getPath() );
+        if (fl != null) {
+            System.out.println("Path : " + fl.getPath());
             pathToMovie.setText(fl.getPath());
         }
 

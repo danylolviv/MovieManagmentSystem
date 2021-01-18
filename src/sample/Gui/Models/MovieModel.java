@@ -9,14 +9,13 @@ import sample.Bll.MovieManager;
 import sample.Exceptions.AddMovieException;
 import sample.Exceptions.DeleteMovieException;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public class MovieModel {
     MovieManager movieManager;
-    private ObservableList<Movie> movies;
+    private final ObservableList<Movie> movies;
 
-    public MovieModel(){
+    public MovieModel() {
         movieManager = new MovieManager();
         movies = FXCollections.observableArrayList();
         movies.setAll(movieManager.getAllMovies());
@@ -26,7 +25,7 @@ public class MovieModel {
         return movies;
     }
 
-    public void updateMovieList(){
+    public void updateMovieList() {
         movies.setAll(movieManager.getAllMovies());
     }
 
@@ -41,33 +40,32 @@ public class MovieModel {
         movieManager.deleteMovie(movieId);
     }
 
-    public void changeMovieRating(Movie movie){
+    public void changeMovieRating(Movie movie) {
         movieManager.changeMovieRating(movie);
     }
 
-    public ObservableList<Movie> sortMovies(ObservableList<Movie> listMovies,String sortParameter){
-        if(sortParameter.equals("title")) {
+    public ObservableList<Movie> sortMovies(ObservableList<Movie> listMovies, String sortParameter) {
+        if (sortParameter.equals("title")) {
             return movieManager.sortMovies(movies, movieManager.SORT_NAME);
-        }
-        else if(sortParameter.equals("rating")) {
+        } else if (sortParameter.equals("rating")) {
             return movieManager.sortMovies(movies, movieManager.SORT_RATING);
         }
         return null;
     }
 
-    public ObservableList<Movie> searchedMovies(String searchQuery){
-        return movieManager.searchMovies(movies,searchQuery);
+    public ObservableList<Movie> searchedMovies(String searchQuery) {
+        return movieManager.searchMovies(movies, searchQuery);
     }
 
     public ObservableList<Movie> searchedMovies(String searchQuery, Double minRating, Double maxRating) {
-        return movieManager.searchMovies(movies,searchQuery,minRating,maxRating);
+        return movieManager.searchMovies(movies, searchQuery, minRating, maxRating);
     }
 
     public ObservableList<Movie> searchedMovies(String searchQuery, List<Category> searchedCategories, List<CatMovie> catMovies) {
-        return movieManager.searchMovies(movies,searchQuery,searchedCategories,catMovies);
+        return movieManager.searchMovies(movies, searchQuery, searchedCategories, catMovies);
     }
 
-    public ObservableList<Movie> searchedMovies(String searchQuery, List<Category> searchedCategories,List<CatMovie> catMovies, Double minRating, Double maxRating) {
-        return movieManager.searchMovies(movies,searchQuery,searchedCategories,catMovies,minRating,maxRating);
+    public ObservableList<Movie> searchedMovies(String searchQuery, List<Category> searchedCategories, List<CatMovie> catMovies, Double minRating, Double maxRating) {
+        return movieManager.searchMovies(movies, searchQuery, searchedCategories, catMovies, minRating, maxRating);
     }
 }

@@ -7,25 +7,25 @@ import java.util.List;
 
 public class CategoryManager {
 
-    private DAOCategory daoCategory;
+    private final DAOCategory daoCategory;
 
-    public CategoryManager(){
+    public CategoryManager() {
         this.daoCategory = new DAOCategory();
     }
 
-    public List<Category> getAllCategories(){
+    public List<Category> getAllCategories() {
         return daoCategory.getAllCategories();
     }
 
-    public Category addNewCategory(String catName){
+    public Category addNewCategory(String catName) {
         Category recievedCategory = daoCategory.addNewCategory(catName);
 
-        System.out.println("recieved cat" +  recievedCategory.toString());
+        System.out.println("recieved cat" + recievedCategory.toString());
 
         return recievedCategory;
     }
 
-    public void deleteCategory(int categoryId){
+    public void deleteCategory(int categoryId) {
         daoCategory.deleteCategory(categoryId);
     }
 }

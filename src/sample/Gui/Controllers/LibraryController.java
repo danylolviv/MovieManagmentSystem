@@ -15,9 +15,8 @@ import java.util.ResourceBundle;
 public class LibraryController implements Initializable {
 
 
-    private ObservableList<Movie> movies;
     MovieModel movModel;
-
+    private ObservableList<Movie> movies;
     @FXML
     private ListView<Movie> listMovie;
 
@@ -32,7 +31,7 @@ public class LibraryController implements Initializable {
         });
     }
 
-    public void getAllMovies(){
+    public void getAllMovies() {
         movModel = new MovieModel();
         movies = FXCollections.observableArrayList();
         movies.addAll(movModel.getMovies());

@@ -1,17 +1,18 @@
 package sample.Dal;
 
+import sample.Be.Category;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import sample.Be.Category;
 
 
 public class DAOCategory {
 
     private static DataAccess dataAccess;
 
-    public DAOCategory(){
-        dataAccess= new DataAccess();
+    public DAOCategory() {
+        dataAccess = new DataAccess();
     }
 
     public List<Category> getAllCategories() {
@@ -34,23 +35,23 @@ public class DAOCategory {
         return categories;
     }
 
-    public void deleteCategory(int categoryId){
+    public void deleteCategory(int categoryId) {
         System.out.println(categoryId);
-        try(Connection con = dataAccess.getConnection()){
+        try (Connection con = dataAccess.getConnection()) {
 
 
             String sql1 = "DELETE FROM CatMovie WHERE category_id = ?";
             PreparedStatement statement1 = con.prepareStatement(sql1);
-            statement1.setInt(1,categoryId);
+            statement1.setInt(1, categoryId);
             statement1.executeUpdate();
 
 
             String sql = "DELETE FROM Category WHERE category_id = ?";
             PreparedStatement statement = con.prepareStatement(sql);
-            statement.setInt(1,categoryId);
+            statement.setInt(1, categoryId);
             statement.executeUpdate();
 
-        }catch (SQLException ex){
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
@@ -68,10 +69,10 @@ public class DAOCategory {
             rs.next();
             int lastCategoryId;
             lastCategoryId = rs.getInt(1);
-            Category addedCategory =  new Category(lastCategoryId, catName);
+            Category addedCategory = new Category(lastCategoryId, catName);
             System.out.println("category object " + addedCategory);
             return addedCategory;
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             ex.printStackTrace();
             return null;
         }
