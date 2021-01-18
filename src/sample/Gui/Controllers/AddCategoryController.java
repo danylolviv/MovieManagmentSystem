@@ -18,7 +18,7 @@ public class AddCategoryController {
     public void addNewCategory(ActionEvent actionEvent) {
         theCategoryModel.addNewCategory(textField.getText());
         textField.clear();
-
+        closeWindow(actionEvent);
     }
 
     public void closeWindow(ActionEvent actionEvent) {

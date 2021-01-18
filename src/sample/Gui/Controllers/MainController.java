@@ -220,4 +220,9 @@ public class MainController implements Initializable {
     public void sortMovies() {
         listMovie.setItems(movModel.sortMovies(listMovie.getItems(),sortChoiceBox.getSelectionModel().getSelectedItem().toLowerCase()));
     }
+
+    public void refresh(ActionEvent actionEvent) {
+        getAllCategories();
+        movModel.updateMovieList();
+    }
 }

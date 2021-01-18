@@ -17,9 +17,12 @@ public class CategoryManager {
         return daoCategory.getAllCategories();
     }
 
-    public void addNewCategory(String catName){
+    public Category addNewCategory(String catName){
         Category recievedCategory = daoCategory.addNewCategory(catName);
+
         System.out.println("recieved cat" +  recievedCategory.toString());
+
+        return recievedCategory;
     }
 
     public void deleteCategory(int categoryId){

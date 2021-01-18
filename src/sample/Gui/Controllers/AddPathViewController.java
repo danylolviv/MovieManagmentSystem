@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TouchEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -72,6 +73,7 @@ public class AddPathViewController implements Initializable {
     public void setCategories(CategoryModel categoryModel) {
         System.out.println("called");
         categoriesList.getItems().addAll(categoryModel.getAllCategories());
+        addedCategories.setItems(categoryModel.getAddMovieCategories());
         this.theCategoryModel = categoryModel;
     }
 
@@ -154,4 +156,6 @@ public class AddPathViewController implements Initializable {
         pastaStage.setScene(new Scene(root));
         pastaStage.show();
     }
+
+
 }

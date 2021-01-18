@@ -29,7 +29,9 @@ public class MovieModel {
 
     public void addMovie(Movie movie){
         movieManager.addMovie(movie);
+        System.out.println("before updating ");
         updateMovieList();
+        System.out.println("after updating ");
     }
 
     public void deleteMovie(int movieId){

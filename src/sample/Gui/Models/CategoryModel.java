@@ -11,14 +11,23 @@ import java.util.List;
 
 public class CategoryModel {
     private final ObservableList<Category> categories;
-    
+    private final ObservableList<Category> addMovieCategories;
     private CategoryManager catManager;
 
     public CategoryModel(){
         this.catManager = new CategoryManager();
         this.categories = FXCollections.observableArrayList();
+        this.addMovieCategories = FXCollections.observableArrayList();
         DAOCategory db = new DAOCategory();
         categories.addAll(db.getAllCategories());
+    }
+
+    public ObservableList<Category> getAddMovieCategories(){
+        return addMovieCategories;
+    }
+
+    public void addItemToCurrentMovie(Category cat){
+        addMovieCategories.add(cat);
     }
 
     public ObservableList<Category> getAllCategories(){
@@ -31,6 +40,6 @@ public class CategoryModel {
         catManager.deleteCategory(categoryId);
     }
     public void addNewCategory(String catName) {
-        catManager.addNewCategory(catName);
+        categories.add(catManager.addNewCategory(catName));
     }
 }
