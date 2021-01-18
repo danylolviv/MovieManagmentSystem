@@ -118,6 +118,7 @@ public class AddPathViewController implements Initializable {
 
     public void findFile(ActionEvent actionEvent) {
         final FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(new File("src"));
         fileChooser.setTitle("OpenFileDialog");
         Stage stage = (Stage) anchorid.getScene().getWindow();
         fileChooser.getExtensionFilters().addAll(
@@ -125,6 +126,7 @@ public class AddPathViewController implements Initializable {
                 new FileChooser.ExtensionFilter("Video", "*.mpeg4")
         );
         File fl = fileChooser.showOpenDialog(stage);
+
         randomFile = fl;
 
 
