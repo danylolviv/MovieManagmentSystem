@@ -31,9 +31,7 @@ public class MovieModel {
 
     public void addMovie(Movie movie) throws AddMovieException {
         movieManager.addMovie(movie);
-        System.out.println("before updating ");
         updateMovieList();
-        System.out.println("after updating ");
     }
 
     public void deleteMovie(int movieId) throws DeleteMovieException {
